@@ -70,8 +70,8 @@ export default function Footer() {
                 </div>
 
                 {/* Bottom Bar */}
-                <div className="pt-8 border-t border-gray-800 dark:border-white/10 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-gray-500 dark:text-gray-400 transition-colors">
-                    <p>&copy; {new Date().getFullYear()} NEXI5 HRM Portal. All rights reserved.</p>
+                <div className="pt-8 border-t border-gray-800 dark:border-white/10 flex flex-col items-center justify-center gap-4 text-sm text-gray-500 dark:text-gray-400 transition-colors">
+                    <p className="text-center">&copy; {new Date().getFullYear()} NEXI5 HRM Portal. All rights reserved.</p>
                     <div className="flex gap-6">
                         <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
                         <a href="#" className="hover:text-white transition-colors">Terms of Service</a>
