@@ -1,0 +1,121 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background:
+        radial-gradient(circle at 70% 50%,
+            rgba(0, 120, 200, 0.45) 0%,
+            rgba(0, 80, 150, 0.25) 25%,
+            rgba(0, 40, 80, 0.1) 45%,
+            rgba(0, 10, 30, 1) 70%),
+
+        linear-gradient(to right,
+            #000b1c 0%,
+            #001f3f 50%,
+            #000b1c 100%);
+}
+
+/* static stars */
+
+body::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+
+    background-image:
+        radial-gradient(#6fd6ff 1px, transparent 1px);
+
+    background-size: 90px 90px;
+
+    opacity: 0.18;
+
+    animation: twinkle 6s ease-in-out infinite alternate;
+
+    pointer-events: none;
+}
+
+@keyframes twinkle {
+    0% {
+        opacity: 0.15;
+    }
+
+    50% {
+        opacity: 0.25;
+    }
+
+    100% {
+        opacity: 0.15;
+    }
+}
+
+/* logo glow */
+
+/* logo glow + pulse */
+
+.logo-glow {
+    animation: logoPulse 2.5s ease-in-out infinite;
+}
+
+@keyframes logoPulse {
+
+    0% {
+        transform: scale(1);
+        filter: drop-shadow(0 0 10px #3ec3ff);
+    }
+
+    50% {
+        transform: scale(1.01);
+        filter: drop-shadow(0 0 18px #6fd6ff);
+    }
+
+    100% {
+        transform: scale(1);
+        filter: drop-shadow(0 0 10px #3ec3ff);
+    }
+
+}
+
+/* Global Scrollbar Styles */
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+/* Light Mode Scrollbar */
+::-webkit-scrollbar-thumb {
+    background: #e2e8f0;
+    border-radius: 10px;
+    border: 1px solid transparent;
+    background-clip: content-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #cbd5e1;
+}
+
+/* Dark Mode Scrollbar */
+.dark ::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    border: 1px solid transparent;
+    background-clip: content-box;
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+    background: rgba(62, 195, 255, 0.4);
+}
+
+/* Scrollbar Thin Utility Support */
+.scrollbar-thin::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+}
