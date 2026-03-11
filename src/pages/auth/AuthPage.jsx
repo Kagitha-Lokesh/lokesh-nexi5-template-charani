@@ -11,27 +11,21 @@ export default function AuthPage({ onLoginSuccess, initialRegister = false }) {
     const [password, setPassword] = useState('');
     const [name, setName] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
-    const [error, setError] = useState('');
     const navigate = useNavigate();
 
     const handleLogin = (e) => {
         e.preventDefault();
-        setError('');
         if (email && password) {
             localStorage.setItem('isAuthenticated', 'true');
             localStorage.setItem('currentUser', JSON.stringify({ email }));
             onLoginSuccess();
             navigate('/dashboard');
-        } else {
-            setError('Please fill in all fields');
         }
     };
 
     const handleRegister = (e) => {
         e.preventDefault();
-        setError('');
         if (password !== confirmPassword) {
-            setError('Passwords do not match');
             return;
         }
         if (name && email && password) {
@@ -39,8 +33,6 @@ export default function AuthPage({ onLoginSuccess, initialRegister = false }) {
             localStorage.setItem('currentUser', JSON.stringify({ email, name }));
             onLoginSuccess();
             navigate('/dashboard');
-        } else {
-            setError('Please fill in all fields');
         }
     };
 
