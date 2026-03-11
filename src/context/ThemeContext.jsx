@@ -8,7 +8,7 @@ export const ThemeProvider = ({ children }) => {
 
     // Initialize themes from local storage
     const [landingTheme, setLandingTheme] = useState(() => {
-        return localStorage.getItem('landingTheme') || 'light';
+        return localStorage.getItem('landingTheme') || 'dark';
     });
 
     const [dashboardTheme, setDashboardTheme] = useState(() => {
