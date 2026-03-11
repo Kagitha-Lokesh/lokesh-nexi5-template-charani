@@ -48,7 +48,7 @@ export default function ScrollProgressButton() {
                     exit={{ opacity: 0, scale: 0.8 }}
                     transition={{ duration: 0.3 }}
                     onClick={scrollToTop}
-                    className="fixed bottom-5 right-5 md:bottom-8 md:right-8 z-[1000] group flex items-center justify-center rounded-full bg-white/10 backdrop-blur-lg border border-white/20 shadow-xl hover:shadow-[0_0_25px_rgba(62,195,255,0.7)] hover:scale-110 transition-all duration-300 w-12 h-12 md:w-[60px] md:h-[60px]"
+                    className="fixed bottom-5 right-5 md:bottom-8 md:right-8 z-[1000] group flex items-center justify-center rounded-full bg-primary dark:bg-white/10 backdrop-blur-lg border border-primary/20 dark:border-white/20 shadow-xl hover:shadow-[0_0_25px_rgba(62,195,255,0.7)] hover:scale-110 transition-all duration-300 w-12 h-12 md:w-[60px] md:h-[60px]"
                     aria-label="Scroll to top"
                 >
                     {/* SVG Progress Ring */}
@@ -68,7 +68,7 @@ export default function ScrollProgressButton() {
                         />
                         {/* Animated Progress Ring */}
                         <circle
-                            className="text-primary dark:text-[#3ec3ff] transition-all duration-150 ease-out"
+                            className="text-white dark:text-[#3ec3ff] transition-all duration-150 ease-out"
                             strokeWidth="3"
                             strokeLinecap="round"
                             stroke="currentColor"
