@@ -20,25 +20,7 @@ body {
             #000b1c 100%);
 }
 
-/* static stars */
-
-body::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-
-    background-image:
-        radial-gradient(#6fd6ff 1px, transparent 1px);
-
-    background-size: 90px 90px;
-
-    opacity: 0.18;
-
-    animation: twinkle 6s ease-in-out infinite alternate;
-
-    pointer-events: none;
-}
-
+/* Twinkling stars moved to .auth-background */
 @keyframes twinkle {
     0% {
         opacity: 0.15;
@@ -128,6 +110,25 @@ body::before {
             rgba(0, 10, 30, 1) 70%),
         linear-gradient(to right, #000b1c 0%, #001f3f 50%, #000b1c 100%);
     background-attachment: fixed;
+    isolation: isolate;
+}
+
+.auth-background::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+
+    background-image:
+        radial-gradient(#6fd6ff 1px, transparent 1px);
+
+    background-size: 90px 90px;
+
+    opacity: 0.18;
+
+    animation: twinkle 6s ease-in-out infinite alternate;
+
+    pointer-events: none;
 }
 
 /* Animations */
