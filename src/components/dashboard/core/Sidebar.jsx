@@ -3,29 +3,15 @@ import { useTheme } from '@/context/ThemeContext';
 import {
     LayoutDashboard, Building2, UserCheck, ClipboardCheck, CalendarOff,
     CalendarDays, CalendarCheck, CreditCard, Wallet, FileText, FolderKanban,
-    ChevronRight, X, LogOut
+    ChevronRight, X, LogOut, Settings
 } from 'lucide-react';
 import logo from '@/assets/nexi5-logo.png';
-
-const hrmsMenu = [
-    { icon: LayoutDashboard, label: 'Dashboard', path: '/dashboard', exact: true },
-    { icon: Building2, label: 'Departments', path: '/dashboard/departments' },
-    { icon: UserCheck, label: 'Employee', path: '/dashboard/employee' },
-    { icon: ClipboardCheck, label: 'Attendance', path: '/dashboard/attendance' },
-    { icon: CalendarCheck, label: 'Leave Management', path: '/dashboard/leaves' },
-    { icon: CreditCard, label: 'Payroll', path: '/dashboard/payroll' },
-    { icon: Wallet, label: 'Accounts', path: '/dashboard/accounts' },
-    { icon: FileText, label: 'Reports', path: '/dashboard/reports' },
-    { icon: CalendarOff, label: 'Holidays', path: '/dashboard/holidays' },
-    { icon: CalendarDays, label: 'Events', path: '/dashboard/events' },
-];
-
-const projectMenu = [
-    { icon: FolderKanban, label: 'Projects', path: '/dashboard/project' }
-];
+import { sidebarConfig, globalMenuItems } from '@/config/sidebarConfig';
 
 export default function Sidebar({ sidebarOpen, setSidebarOpen, handleLogout }) {
     const { isDarkMode } = useTheme();
+    const role = localStorage.getItem('userRole') || 'employee';
+    const menuItems = sidebarConfig[role] || [];
 
     // eslint-disable-next-line no-unused-vars
     const NavItem = ({ icon: Icon, label, path, exact }) => {
@@ -68,35 +54,62 @@ export default function Sidebar({ sidebarOpen, setSidebarOpen, handleLogout }) {
             <aside className={`fixed inset-y-0 left-0 z-30 w-[260px] flex flex-col transition-all duration-300 ease-in-out lg:static lg:translate-x-0 ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'} ${isDarkMode ? 'bg-[#0c162d]/90 backdrop-blur-md border-r border-white/10' : 'bg-white border-r border-borderColor'}`}>
 
                 {/* Logo Area */}
-                <div className={`h-20 flex items-center justify-between px-6 border-b ${isDarkMode ? 'border-white/10' : 'border-borderColor'}`}>
-                    <div className="flex items-center gap-2 cursor-pointer" onClick={() => window.scrollTo(0, 0)}>
-                        <img src={logo} alt="Logo" className={`w-48 h-24 object-contain rounded-lg transition-all ${isDarkMode ? 'brightness-110 drop-shadow-[0_0_8px_rgba(62,195,255,0.3)]' : ''}`} />
+                <div className={`h-24 flex items-center justify-between px-6 border-b ${isDarkMode ? 'border-white/10' : 'border-borderColor'}`}>
+                    <div
+                        className="flex items-center justify-center p-2 bg-gray-900 dark:bg-transparent rounded-lg transition-all cursor-pointer h-16 w-full max-w-[160px]"
+                        onClick={() => window.scrollTo(0, 0)}
+                    >
+                        <img src={logo} alt="Logo" className={`h-[120px] md:h-[120px] object-contain transition-all ${isDarkMode ? 'brightness-110 drop-shadow-[0_0_8px_rgba(62,195,255,0.3)]' : ''}`} />
                     </div>
-                    <button onClick={() => setSidebarOpen(false)} className="lg:hidden text-textSecondary dark:text-gray-400 hover:text-dark dark:hover:text-white">
+                    <button onClick={() => setSidebarOpen(false)} className="lg:hidden text-textSecondary dark:text-gray-400 hover:text-dark dark:hover:text-white ml-2">
                         <X size={20} />
                     </button>
                 </div>
 
                 {/* Navigation Content */}
-                <div className={`flex-1 overflow-y-auto py-6 scrollbar-thin ${isDarkMode ? 'scrollbar-thumb-white/10' : 'scrollbar-thumb-borderColor'} scrollbar-track-transparent`}>
+                <div className={`flex-1 overflow-y-auto py-6 space-y-8 scrollbar-thin ${isDarkMode ? 'scrollbar-thumb-white/10' : 'scrollbar-thumb-borderColor'} scrollbar-track-transparent`}>
 
-                    {/* HRMS Group */}
-                    <div className="mb-6">
-                        <h3 className="px-6 text-xs font-semibold text-textSecondary dark:text-gray-500 uppercase tracking-wider mb-2">HRMS</h3>
-                        <nav className="flex flex-col">
-                            {hrmsMenu.map((item, index) => (
-                                <NavItem key={index} {...item} />
-                            ))}
-                        </nav>
+                    {/* Role Based Categorized Menu */}
+                    <div className="flex flex-col gap-8">
+                        {menuItems.map((category, catIdx) => (
+                            <div key={category.category + catIdx} className="flex flex-col">
+                                {/* Category Heading */}
+                                <div className="px-6 mb-2">
+                                    <h3 className={`text-[11px] font-black uppercase tracking-[0.2em] ${isDarkMode ? 'text-[#3ec3ff] shadow-[0_0_15px_rgba(62,195,255,0.1)]' : 'text-primary'}`}>
+                                        {category.category}
+                                    </h3>
+                                    <div className={`h-[1px] w-full mt-1.5 ${isDarkMode ? 'bg-gradient-to-r from-[#3ec3ff]/30 to-transparent' : 'bg-gradient-to-r from-primary/20 to-transparent'}`} />
+                                </div>
+
+                                <nav className="flex flex-col">
+                                    <ul className="space-y-1">
+                                        {category.items.map((item, index) => (
+                                            <li key={item.path + index}>
+                                                <NavItem {...item} />
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </nav>
+                            </div>
+                        ))}
                     </div>
 
-                    {/* Project Group */}
-                    <div className="mb-6">
-                        <h3 className="px-6 text-xs font-semibold text-textSecondary dark:text-gray-500 uppercase tracking-wider mb-2">Project</h3>
+                    {/* Shared / Global Menu */}
+                    <div className="flex flex-col pt-4">
+                        <div className="px-6 mb-2">
+                            <h3 className={`text-[11px] font-black uppercase tracking-[0.2em] ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}>
+                                Account Settings
+                            </h3>
+                            <div className={`h-[1px] w-full mt-1.5 ${isDarkMode ? 'bg-white/5' : 'bg-gray-100'}`} />
+                        </div>
                         <nav className="flex flex-col">
-                            {projectMenu.map((item, index) => (
-                                <NavItem key={index} {...item} />
-                            ))}
+                            <ul className="space-y-1">
+                                {globalMenuItems.map((item, index) => (
+                                    <li key={item.path + index}>
+                                        <NavItem {...item} />
+                                    </li>
+                                ))}
+                            </ul>
                         </nav>
                     </div>
 

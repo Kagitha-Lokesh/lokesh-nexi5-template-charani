@@ -4,8 +4,26 @@ import { ChevronRight, PlayCircle } from 'lucide-react';
 import { staggerContainer, fadeUp, parallaxBgMotion, isMobile } from '../../animations/variants';
 
 export default function HeroSection({ onGetStarted }) {
+    const [currentHeadlineIndex, setCurrentHeadlineIndex] = React.useState(0);
+    const headlines = [
+        "Smart HR Management Platform",
+        "Manage Employees Efficiently",
+        "Automate Payroll & Attendance",
+        "Empower Your Workforce"
+    ];
+
+    React.useEffect(() => {
+        const timer = setInterval(() => {
+            setCurrentHeadlineIndex((prev) => (prev + 1) % headlines.length);
+        }, 4000);
+        return () => clearInterval(timer);
+    }, []);
+
+    const headlineText = headlines[currentHeadlineIndex];
+    const letters = headlineText.split("");
+
     return (
-        <section id="hero" className="relative -mt-20 py-24 md:pt-48 md:pb-32 lg:pb-40 overflow-hidden bg-white dark:bg-transparent transition-colors duration-300">
+        <section id="hero" className="relative py-24 md:pt-48 md:pb-32 lg:pb-40 overflow-hidden bg-gradient-to-r from-sky-100 via-blue-100 to-indigo-100 dark:bg-none transition-colors duration-300 min-h-[90vh] flex items-center">
             {/* Background Gradients */}
             <div className={`absolute top-0 left-0 w-full h-full overflow-hidden -z-10 ${isMobile ? 'opacity-50' : ''}`}>
                 <motion.div
@@ -37,9 +55,28 @@ export default function HeroSection({ onGetStarted }) {
                         NEXI5 HRM Portal
                     </motion.div>
 
-                    <motion.h1 variants={fadeUp} className="font-headings text-4xl md:text-[56px] leading-[1.1] font-bold text-dark dark:text-white mb-6 transition-colors">
-                        Smart HR Management Platform for <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary dark:from-[#3ec3ff] dark:to-primary">Modern Organizations</span>
-                    </motion.h1>
+                    <div className="min-h-[160px] md:min-h-[220px]">
+                        <motion.h1 
+                            key={currentHeadlineIndex}
+                            className="font-headings text-4xl md:text-[56px] leading-[1.1] font-bold text-dark dark:text-white mb-6 transition-colors"
+                        >
+                            {letters.map((letter, index) => (
+                                <motion.span
+                                    key={`${currentHeadlineIndex}-${index}`}
+                                    initial={{ opacity: 0, y: 10 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    transition={{ 
+                                        duration: 0.2,
+                                        delay: index * 0.03,
+                                        ease: "easeOut"
+                                    }}
+                                    className={index > headlineText.indexOf("Platform") && headlineText.includes("Platform") ? "text-transparent bg-clip-text bg-gradient-to-r from-primary via-secondary to-primary dark:from-[#3ec3ff] dark:via-primary dark:to-[#3ec3ff] animate-gradient-x bg-[length:200%_auto]" : ""}
+                                >
+                                    {letter}
+                                </motion.span>
+                            ))}
+                        </motion.h1>
+                    </div>
 
                     <motion.p variants={fadeUp} className="text-xl text-gray-600 dark:text-gray-300 mb-10 leading-relaxed max-w-lg transition-colors">
                         Manage employees, attendance, payroll, performance, and HR operations from one unified system.
@@ -188,6 +225,23 @@ export default function HeroSection({ onGetStarted }) {
                 </motion.div>
 
             </div>
+
+            {/* Scroll Indicator */}
+            <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 1.5, duration: 1 }}
+                className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-gray-400 dark:text-gray-500"
+            >
+                <span className="text-[10px] font-black uppercase tracking-[0.2em]">Scroll Down</span>
+                <motion.div
+                    animate={{ y: [0, 8, 0] }}
+                    transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+                    className="w-5 h-8 rounded-full border border-gray-300 dark:border-gray-700 flex justify-center p-1"
+                >
+                    <div className="w-1 h-2 bg-primary dark:bg-[#3ec3ff] rounded-full" />
+                </motion.div>
+            </motion.div>
         </section>
     );
 }

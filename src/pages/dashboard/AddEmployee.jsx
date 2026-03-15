@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { ArrowLeft, User, Mail, Briefcase, Calendar, MapPin, Phone, Shield, Upload, CheckCircle2 } from 'lucide-react';
 import { useTheme } from '@/context/ThemeContext';
+import { attendanceDepartments, employmentTypes } from '@/datasets';
 import '@/index.css';
 
 export default function AddEmployee() {
@@ -258,11 +259,9 @@ export default function AddEmployee() {
                                             }`}
                                     >
                                         <option value="" disabled className={isDarkMode ? 'bg-[#0c162d]' : ''}>Select department</option>
-                                        <option value="Web Development" className={isDarkMode ? 'bg-[#0c162d]' : 'text-dark'}>Web Development</option>
-                                        <option value="Marketing" className={isDarkMode ? 'bg-[#0c162d]' : 'text-dark'}>Marketing</option>
-                                        <option value="App Development" className={isDarkMode ? 'bg-[#0c162d]' : 'text-dark'}>App Development</option>
-                                        <option value="Support" className={isDarkMode ? 'bg-[#0c162d]' : 'text-dark'}>Support</option>
-                                        <option value="Accounts" className={isDarkMode ? 'bg-[#0c162d]' : 'text-dark'}>Accounts</option>
+                                        {attendanceDepartments.filter(d => d.value !== '').map(dept => (
+                                            <option key={dept.value} value={dept.label} className={isDarkMode ? 'bg-[#0c162d]' : 'text-dark'}>{dept.label}</option>
+                                        ))}
                                     </select>
                                     {errors.department && <p className="text-red-500 text-xs mt-1.5 font-medium">{errors.department}</p>}
                                 </div>
@@ -318,10 +317,9 @@ export default function AddEmployee() {
                                             }`}
                                     >
                                         <option value="" disabled className={isDarkMode ? 'bg-[#0c162d]' : ''}>Select type</option>
-                                        <option value="Full Time" className={isDarkMode ? 'bg-[#0c162d]' : 'text-dark'}>Full Time</option>
-                                        <option value="Part Time" className={isDarkMode ? 'bg-[#0c162d]' : 'text-dark'}>Part Time</option>
-                                        <option value="Contract" className={isDarkMode ? 'bg-[#0c162d]' : 'text-dark'}>Contract</option>
-                                        <option value="Intern" className={isDarkMode ? 'bg-[#0c162d]' : 'text-dark'}>Intern</option>
+                                        {employmentTypes.map(type => (
+                                            <option key={type} value={type} className={isDarkMode ? 'bg-[#0c162d]' : 'text-dark'}>{type}</option>
+                                        ))}
                                     </select>
                                 </div>
 

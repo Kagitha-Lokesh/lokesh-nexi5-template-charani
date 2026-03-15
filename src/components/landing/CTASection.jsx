@@ -8,8 +8,8 @@ export default function CTASection({ onGetStarted }) {
             variants={fadeUp}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, margin: "-80px" }}
-            className="py-12 md:py-16 lg:py-24 bg-white dark:bg-transparent relative overflow-hidden transition-colors duration-300"
+            viewport={{ once: true, margin: "-100px" }}
+            className="py-12 md:py-16 lg:py-24 bg-gradient-to-b from-transparent via-blue-50 to-transparent dark:bg-none relative overflow-hidden transition-colors duration-300"
         >
             <div className="max-w-[1000px] mx-auto px-6 relative z-10">
 
@@ -17,7 +17,7 @@ export default function CTASection({ onGetStarted }) {
                     initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    transition={{ duration: 0.6 }}
+                    transition={{ duration: 0.8 }}
                     className="bg-gradient-to-br from-primary to-secondary dark:from-primary/80 dark:to-secondary/80 rounded-3xl p-12 md:p-20 text-center text-white shadow-2xl relative overflow-hidden transition-colors"
                 >
                     {/* Decorative shapes */}
@@ -32,18 +32,22 @@ export default function CTASection({ onGetStarted }) {
                     </p>
 
                     <div className="flex flex-col sm:flex-row items-center justify-center gap-4 relative z-10">
-                        <button
+                        <motion.button
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
                             onClick={onGetStarted}
-                            className="w-full sm:w-auto bg-white text-primary dark:bg-white/10 dark:text-white dark:border-white/20 border border-transparent dark:hover:bg-white/20 hover:bg-gray-50 px-8 py-4 rounded-xl font-bold text-lg transition-all hover:scale-105 shadow-xl"
+                            className="w-full sm:w-auto bg-white text-primary dark:bg-white/10 dark:text-white dark:border-white/20 border border-transparent dark:hover:bg-white/20 hover:bg-gray-50 px-8 py-4 rounded-xl font-bold text-lg transition-all shadow-xl"
                         >
                             Start Free Trial
-                        </button>
-                        <button
+                        </motion.button>
+                        <motion.button
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
                             onClick={onGetStarted}
                             className="w-full sm:w-auto bg-transparent border-2 border-white/30 hover:border-white text-white px-8 py-4 rounded-xl font-bold text-lg transition-all"
                         >
                             Sign Up
-                        </button>
+                        </motion.button>
                     </div>
                 </motion.div>
 

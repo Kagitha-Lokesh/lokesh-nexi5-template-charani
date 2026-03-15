@@ -1,4 +1,5 @@
-import React from 'react';
+import { motion } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 import { MoreVertical, Eye, Edit2, Trash2, Search, Filter } from 'lucide-react';
 import { useTheme } from '@/context/ThemeContext';
 import { StatusBadge } from '@/components/common';
@@ -25,20 +26,31 @@ const PaymentBadge = ({ text, isDarkMode }) => {
 
 export default function ProjectSummaryTable() {
     const { isDarkMode } = useTheme();
+    const navigate = useNavigate();
 
     return (
-        <div className={`rounded-[10px] border flex flex-col mb-6 transition-all ${isDarkMode ? 'bg-[#0c162d]/50 backdrop-blur-md border-white/10 shadow-2xl' : 'bg-white border-borderColor shadow-[0px_10px_25px_rgba(0,0,0,0.08)]'}`}>
+        <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className={`rounded-[10px] border flex flex-col mb-6 transition-all relative overflow-hidden group ${isDarkMode ? 'bg-[#0c162d]/50 backdrop-blur-md border-white/10 shadow-2xl' : 'bg-white border-borderColor shadow-[0px_10px_25px_rgba(0,0,0,0.08)]'}`}
+        >
+            <div className="absolute bottom-0 right-0 w-48 h-48 -mr-24 -mb-24 bg-blue-500/5 rounded-full pointer-events-none group-hover:bg-blue-500/10 transition-colors duration-700" />
 
             {/* Table Header Area */}
-            <div className={`p-5 md:p-6 border-b flex justify-between items-center ${isDarkMode ? 'border-white/10' : 'border-borderColor'}`}>
+            <div className={`p-5 md:p-6 border-b flex justify-between items-center relative z-10 ${isDarkMode ? 'border-white/10' : 'border-borderColor'}`}>
                 <h2 className={`text-[18px] lg:text-[20px] font-headings font-bold tracking-wide ${isDarkMode ? 'text-white' : 'text-dark'}`}>Project Summary</h2>
-                <button className={`text-sm font-medium transition-colors ${isDarkMode ? 'text-[#3ec3ff] hover:text-[#3ec3ff]/80' : 'text-textSecondary hover:text-primary'}`}>
+                <button 
+                    onClick={() => navigate('/dashboard/project')}
+                    className={`text-sm font-medium transition-colors ${isDarkMode ? 'text-[#3ec3ff] hover:text-[#3ec3ff]/80 underline decoration-transparent hover:decoration-[#3ec3ff] underline-offset-4' : 'text-textSecondary hover:text-primary hover:underline underline-offset-4'}`}
+                >
                     View All
                 </button>
             </div>
 
             {/* Table wrapper */}
-            <div className="overflow-x-auto w-full p-2 sm:p-6">
+            <div className="overflow-x-auto w-full p-2 sm:p-6 relative z-10">
                 <table className="w-full text-left border-collapse min-w-[1000px]">
                     <thead>
                         <tr className={`border-b ${isDarkMode ? 'border-white/5' : 'border-borderColor'}`}>
@@ -52,9 +64,17 @@ export default function ProjectSummaryTable() {
                     </thead>
                     <tbody className={`divide-y ${isDarkMode ? 'divide-white/5' : 'divide-transparent'}`}>
                         {mockTableData.map((row, index) => (
-                            <tr key={index} className={`group transition-colors border-b last:border-b-0 h-[70px] ${isDarkMode ? 'hover:bg-white/[0.02] border-white/5' : 'hover:bg-lightBlueBg border-borderColor'}`}>
+                            <motion.tr 
+                                initial={{ opacity: 0, x: -10 }}
+                                whileInView={{ opacity: 1, x: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ duration: 0.3, delay: index * 0.05 }}
+                                key={index} 
+                                onClick={() => navigate('/dashboard/project')}
+                                className={`group transition-all border-b last:border-b-0 h-[70px] cursor-pointer ${isDarkMode ? 'hover:bg-white/[0.04] border-white/5' : 'hover:bg-lightBlueBg border-borderColor'}`}
+                            >
                                 <td className="px-4 py-3">
-                                    <div>
+                                    <div className="group-hover:translate-x-1 transition-transform duration-300">
                                         <p className={`text-[14px] font-bold ${isDarkMode ? 'text-[#3ec3ff]' : 'text-primary'}`}>{row.id}</p>
                                         <p className={`text-[13px] font-medium ${isDarkMode ? 'text-gray-400' : 'text-textSecondary'}`}>{row.client}</p>
                                     </div>
@@ -62,7 +82,7 @@ export default function ProjectSummaryTable() {
                                 <td className="px-4 py-3">
                                     <AvatarStack isDarkMode={isDarkMode} />
                                 </td>
-                                <td className={`px-4 py-3 text-[14px] font-bold ${isDarkMode ? 'text-gray-200' : 'text-dark'}`}>{row.project}</td>
+                                <td className={`px-4 py-3 text-[14px] font-bold group-hover:text-blue-500 transition-colors duration-300 ${isDarkMode ? 'text-gray-200' : 'text-dark'}`}>{row.project}</td>
                                 <td className={`px-4 py-3 text-[14px] font-semibold ${isDarkMode ? 'text-gray-400' : 'text-textSecondary'}`}>{row.cost}</td>
                                 <td className="px-4 py-3">
                                     <PaymentBadge text={row.payment} isDarkMode={isDarkMode} />
@@ -70,12 +90,12 @@ export default function ProjectSummaryTable() {
                                 <td className="px-4 py-3">
                                     <StatusBadge status={row.status} />
                                 </td>
-                            </tr>
+                            </motion.tr>
                         ))}
                     </tbody>
                 </table>
             </div>
 
-        </div>
+        </motion.div>
     );
 }

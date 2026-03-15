@@ -14,5 +14,14 @@ export const leaveStats = [
     { title: 'Total Leave Requests', value: '125', subtext: 'This month', change: '▲ 12%', isPositive: true },
     { title: 'Approved Leaves', value: '80', subtext: '', change: '▲ 8%', isPositive: true },
     { title: 'Pending Requests', value: '30', subtext: '', change: '▲ 5%', isPositive: true },
-    { title: 'Rejected Requests', value: '15', subtext: '', change: '▼ 2%', isPositive: false },
+];
+
+export const leaveYearOptions = ['2024', '2025', '2026'];
+
+export const leaveTypeOptions = [
+    'Annual Leave',
+    'Sick Leave',
+    'Casual Leave',
+    'Maternity Leave',
+    'Work From Home'
 ];

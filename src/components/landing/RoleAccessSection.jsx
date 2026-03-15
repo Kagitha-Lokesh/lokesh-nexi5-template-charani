@@ -1,60 +1,11 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Shield, Building, Users, UserCircle } from 'lucide-react';
-import { fadeUp } from '../../animations/variants';
+import { fadeUp, staggerContainer } from '../../animations/variants';
 
-const roles = [
-    {
-        icon: <Shield size={24} />,
-        title: "Admin / CEO",
-        color: "from-purple-500 to-indigo-500",
-        bg: "bg-purple-50 dark:bg-purple-500/10",
-        iconColor: "text-purple-600 dark:text-purple-400",
-        features: [
-            "Strategic dashboards",
-            "Organization management",
-            "Analytics and reporting"
-        ]
-    },
-    {
-        icon: <Building size={24} />,
-        title: "HR Department",
-        color: "from-primary to-secondary",
-        bg: "bg-blue-50 dark:bg-blue-500/10",
-        iconColor: "text-primary dark:text-[#3ec3ff]",
-        features: [
-            "Employee lifecycle management",
-            "Payroll processing",
-            "Leave approvals",
-            "Training management"
-        ]
-    },
-    {
-        icon: <Users size={24} />,
-        title: "Managers",
-        color: "from-amber-500 to-orange-500",
-        bg: "bg-amber-50 dark:bg-amber-500/10",
-        iconColor: "text-amber-600 dark:text-amber-400",
-        features: [
-            "Team dashboards",
-            "Performance reviews",
-            "Leave approvals"
-        ]
-    },
-    {
-        icon: <UserCircle size={24} />,
-        title: "Employees",
-        color: "from-emerald-500 to-teal-500",
-        bg: "bg-emerald-50 dark:bg-emerald-500/10",
-        iconColor: "text-emerald-600 dark:text-emerald-400",
-        features: [
-            "Self service portal",
-            "Attendance tracking",
-            "Payslip viewing",
-            "Leave requests"
-        ]
-    }
-];
+// Datasets
+import { rolesAccessData } from '../../datasets/landing/rolesData';
+
 
 export default function RoleAccessSection() {
     return (
@@ -80,15 +31,20 @@ export default function RoleAccessSection() {
                 </div>
 
                 {/* Horizontal scroll on mobile, grid on desktop */}
-                <div className="flex overflow-x-auto pb-8 md:pb-0 md:grid md:grid-cols-2 lg:grid-cols-4 gap-6 snap-x snap-mandatory hide-scrollbar">
-                    {roles.map((role, idx) => (
+                <motion.div 
+                    variants={staggerContainer}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true }}
+                    className="flex overflow-x-auto pb-8 md:pb-0 md:grid md:grid-cols-2 lg:grid-cols-4 gap-6 snap-x snap-mandatory hide-scrollbar"
+                >
+                    {rolesAccessData.map((role, idx) => (
+
                         <motion.div
                             key={idx}
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.5, delay: idx * 0.1 }}
-                            className="min-w-[280px] md:min-w-0 flex-1 snap-center bg-white dark:bg-white/5 dark:backdrop-blur-md rounded-2xl border border-gray-100 dark:border-white/10 p-6 shadow-sm hover:shadow-soft hover:-translate-y-1 transition-all duration-300 relative overflow-hidden group"
+                            variants={fadeUp}
+                            whileHover={{ y: -8, transition: { duration: 0.3 } }}
+                            className="min-w-[280px] md:min-w-0 flex-1 snap-center bg-white dark:bg-white/5 dark:backdrop-blur-md rounded-2xl border border-gray-100 dark:border-white/10 p-6 shadow-sm hover:shadow-2xl hover:shadow-blue-500/10 transition-all duration-300 relative overflow-hidden group"
                         >
                             {/* Top Gradient Line */}
                             <div className={`absolute top-0 left-0 w-full h-1 bg-gradient-to-r ${role.color} opacity-0 group-hover:opacity-100 transition-opacity`} />
@@ -109,7 +65,7 @@ export default function RoleAccessSection() {
                             </ul>
                         </motion.div>
                     ))}
-                </div>
+                </motion.div>
 
             </div>
 

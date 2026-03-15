@@ -3,6 +3,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import { ArrowLeft, Calendar, FileText, Send, Clock, AlertCircle, CheckCircle2, Upload } from 'lucide-react';
 import { useTheme } from '@/context/ThemeContext';
 import '@/index.css';
+import { leaveTypeOptions } from '@/datasets/hr/leaveData';
 
 export default function ApplyLeave() {
     const navigate = useNavigate();
@@ -181,11 +182,11 @@ export default function ApplyLeave() {
                                         }`}
                                 >
                                     <option value="" disabled className={isDarkMode ? 'bg-[#0c162d]' : ''}>Select leave type</option>
-                                    <option value="Annual Leave" className={isDarkMode ? 'bg-[#0c162d]' : 'text-dark'}>Annual Leave</option>
-                                    <option value="Sick Leave" className={isDarkMode ? 'bg-[#0c162d]' : 'text-dark'}>Sick Leave</option>
-                                    <option value="Casual Leave" className={isDarkMode ? 'bg-[#0c162d]' : 'text-dark'}>Casual Leave</option>
-                                    <option value="Maternity Leave" className={isDarkMode ? 'bg-[#0c162d]' : 'text-dark'}>Maternity Leave</option>
-                                    <option value="Work From Home" className={isDarkMode ? 'bg-[#0c162d]' : 'text-dark'}>Work From Home</option>
+                                    {leaveTypeOptions.map((option) => (
+                                        <option key={option} value={option} className={isDarkMode ? 'bg-[#0c162d]' : 'text-dark'}>
+                                            {option}
+                                        </option>
+                                    ))}
                                 </select>
                                 {errors.leaveType && <p className="text-red-500 text-xs mt-1.5 font-medium">{errors.leaveType}</p>}
                             </div>

@@ -15,11 +15,16 @@ export default function Navbar({ onLoginClick, onRegisterClick, isDarkMode, togg
     };
 
     return (
-        <nav className="fixed w-full z-50 bg-white/70 dark:bg-white/10 backdrop-blur-lg border-b border-gray-100 dark:border-white/20 transition-all duration-300">
+        <nav className="fixed w-full z-50 bg-white/70 dark:bg-white/10 backdrop-blur-lg border-b border-gray-100 dark:border-white/20 transition-all duration-300 overflow-hidden">
             <div className="max-w-[1200px] mx-auto px-6 h-16 md:h-20 flex items-center justify-between">
                 {/* Logo */}
-                <div className="flex items-center gap-2 cursor-pointer group" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
-                    <img src={logo} alt="Logo" className="w-48 h-24 md:w-40 md:h-18 object-contain transform group-hover:scale-105 transition-all duration-300" />
+                <div
+                    className="flex-shrink-0"
+                    onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+                >
+                    <div className="flex items-center h-[110px] md:h-[110px] bg-gray-900 dark:bg-transparent rounded-lg px-2 transition-all duration-300 cursor-pointer group shadow-sm hover:shadow-md max-w-[160px]">
+                        <img src={logo} alt="Logo" className="h-full md:h-full object-contain transform group-hover:scale-105 transition-all duration-300" />
+                    </div>
                 </div>
 
                 {/* Desktop Menu */}

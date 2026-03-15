@@ -1,9 +1,9 @@
 import { Minimize2, Maximize2, X, ChevronLeft, ChevronRight } from 'lucide-react';
 import { useTheme } from '@/context/ThemeContext';
+import { daysOfWeek, currentMonthTitle, getEventsForDay } from '@/datasets/events/eventsData';
 
 export default function EventsManagement() {
     const { isDarkMode } = useTheme();
-    const daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
     // Generating a simple 35-cell grid for a month view simulation (March 2026 starts on a Sunday)
     const daysInMonth = Array.from({ length: 31 }, (_, i) => i + 1);
@@ -29,7 +29,7 @@ export default function EventsManagement() {
 
                 {/* Calendar Controls */}
                 <div className="p-5 md:p-6 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-                    <h3 className={`text-xl font-bold ${isDarkMode ? 'text-white' : 'text-textPrimary'}`}>MARCH 2026</h3>
+                    <h3 className={`text-xl font-bold ${isDarkMode ? 'text-white' : 'text-textPrimary'}`}>{currentMonthTitle}</h3>
 
                     <div className="flex items-center gap-4 w-full sm:w-auto justify-between sm:justify-end">
                         {/* View Switch */}
@@ -83,6 +83,8 @@ export default function EventsManagement() {
                             {daysInMonth.map((day) => {
                                 const isToday = day === 5; // Simulating today
                                 const isWeekend = day % 7 === 1 || day % 7 === 0;
+                                const dayEvents = getEventsForDay(day);
+
                                 return (
                                     <div
                                         key={`day-${day}`}
@@ -97,26 +99,30 @@ export default function EventsManagement() {
 
                                         {/* Events Injection */}
                                         <div className="mt-2 flex flex-col gap-1 w-full max-w-[full] pr-1">
-                                            {day === 1 && (
-                                                <div className={`w-full text-white text-[11px] font-medium px-2 py-1 rounded truncate shadow-sm hover:brightness-110 cursor-pointer transition-all ${isDarkMode ? 'bg-blue-600/80 shadow-[0_0_10px_rgba(37,99,235,0.3)]' : 'bg-secondary'}`}>
-                                                    Birthday Party
-                                                </div>
-                                            )}
-                                            {day === 5 && (
-                                                <div className={`w-full border text-[11px] font-semibold px-2 py-1 rounded truncate shadow-sm hover:brightness-95 cursor-pointer transition-all ${isDarkMode ? 'bg-[#3ec3ff]/20 text-[#3ec3ff] border-[#3ec3ff]/30' : 'bg-lightSky text-primary border-primary/20'}`}>
-                                                    Conference
-                                                </div>
-                                            )}
-                                            {day === 9 && (
-                                                <>
-                                                    <div className={`w-full text-white text-[11px] font-medium px-2 py-1 rounded truncate shadow-sm hover:brightness-110 cursor-pointer transition-all ${isDarkMode ? 'bg-teal-600/80' : 'bg-teal-500'}`}>
-                                                        12:30p Meeting
-                                                    </div>
-                                                    <div className={`w-full text-white text-[11px] font-medium px-2 py-1 rounded truncate shadow-sm hover:brightness-110 cursor-pointer transition-all ${isDarkMode ? 'bg-blue-600/80' : 'bg-secondary'}`}>
-                                                        6:30p Meeting
-                                                    </div>
-                                                </>
-                                            )}
+                                            {dayEvents.map((event, idx) => {
+                                                if (event.type === 'primary') {
+                                                    return (
+                                                        <div key={idx} className={`w-full text-white text-[11px] font-medium px-2 py-1 rounded truncate shadow-sm hover:brightness-110 cursor-pointer transition-all ${isDarkMode ? 'bg-blue-600/80 shadow-[0_0_10px_rgba(37,99,235,0.3)]' : 'bg-secondary'}`}>
+                                                            {event.title}
+                                                        </div>
+                                                    );
+                                                }
+                                                if (event.type === 'outline') {
+                                                    return (
+                                                        <div key={idx} className={`w-full border text-[11px] font-semibold px-2 py-1 rounded truncate shadow-sm hover:brightness-95 cursor-pointer transition-all ${isDarkMode ? 'bg-[#3ec3ff]/20 text-[#3ec3ff] border-[#3ec3ff]/30' : 'bg-lightSky text-primary border-primary/20'}`}>
+                                                            {event.title}
+                                                        </div>
+                                                    );
+                                                }
+                                                if (event.type === 'teal') {
+                                                    return (
+                                                        <div key={idx} className={`w-full text-white text-[11px] font-medium px-2 py-1 rounded truncate shadow-sm hover:brightness-110 cursor-pointer transition-all ${isDarkMode ? 'bg-teal-600/80' : 'bg-teal-500'}`}>
+                                                            {event.title}
+                                                        </div>
+                                                    );
+                                                }
+                                                return null;
+                                            })}
                                         </div>
                                     </div>
                                 );

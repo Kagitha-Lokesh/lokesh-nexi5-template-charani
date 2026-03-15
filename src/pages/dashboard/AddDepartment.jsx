@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { ArrowLeft, CheckCircle2 } from 'lucide-react';
 import { useTheme } from '@/context/ThemeContext';
+import { departmentHeadOptions } from '@/datasets';
 import '@/index.css';
 
 export default function AddDepartment() {
@@ -189,10 +190,9 @@ export default function AddDepartment() {
                                         }`}
                                 >
                                     <option value="" disabled className={isDarkMode ? 'bg-[#0c162d]' : ''}>Select department head</option>
-                                    <option value="John Smith" className={isDarkMode ? 'bg-[#0c162d]' : 'text-dark'}>John Smith</option>
-                                    <option value="Maryam Amiri" className={isDarkMode ? 'bg-[#0c162d]' : 'text-dark'}>Maryam Amiri</option>
-                                    <option value="Frank Camly" className={isDarkMode ? 'bg-[#0c162d]' : 'text-dark'}>Frank Camly</option>
-                                    <option value="Gary Camara" className={isDarkMode ? 'bg-[#0c162d]' : 'text-dark'}>Gary Camara</option>
+                                    {departmentHeadOptions.map(head => (
+                                        <option key={head} value={head} className={isDarkMode ? 'bg-[#0c162d]' : 'text-dark'}>{head}</option>
+                                    ))}
                                 </select>
                                 {errors.head && <p className="text-red-500 text-xs mt-1.5 font-medium">{errors.head}</p>}
                             </div>

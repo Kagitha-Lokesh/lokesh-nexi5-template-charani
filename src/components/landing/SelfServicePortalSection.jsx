@@ -1,16 +1,11 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { CheckCircle2 } from 'lucide-react';
-import { fadeUp } from '../../animations/variants';
+import { fadeUp, staggerContainer } from '../../animations/variants';
 
-const tasks = [
-    "Apply Leave",
-    "Check Attendance",
-    "Download Payslips",
-    "Upload Documents",
-    "Track Performance",
-    "Submit Expenses"
-];
+// Datasets
+import { portalTasks, portalActions, mockupUser, upcomingLeave } from '../../datasets/landing/selfServiceData';
+
 
 export default function SelfServicePortalSection() {
     return (
@@ -44,8 +39,9 @@ export default function SelfServicePortalSection() {
                                     <div className="w-full h-full rounded-full bg-gradient-to-tr from-sky-400 to-emerald-400" />
                                 </div>
                                 <div>
-                                    <div className="text-sm font-bold text-dark dark:text-white transition-colors">Welcome, Sarah</div>
-                                    <div className="text-[10px] text-gray-400 dark:text-gray-400 transition-colors">Software Engineer</div>
+                                    <div className="text-sm font-bold text-dark dark:text-white transition-colors">Welcome, {mockupUser.name}</div>
+                                    <div className="text-[10px] text-gray-400 dark:text-gray-400 transition-colors">{mockupUser.role}</div>
+
                                 </div>
                             </div>
                             <div className="flex gap-2">
@@ -58,12 +54,8 @@ export default function SelfServicePortalSection() {
                         {/* Action Grid */}
                         <div className="p-6">
                             <div className="grid grid-cols-2 gap-4 mb-6">
-                                {[
-                                    { label: "Request Time Off", color: "bg-orange-50 dark:bg-orange-500/10", text: "text-orange-500 dark:text-orange-400" },
-                                    { label: "Submit Expense", color: "bg-emerald-50 dark:bg-emerald-500/10", text: "text-emerald-500 dark:text-emerald-400" },
-                                    { label: "View Payslip", color: "bg-blue-50 dark:bg-blue-500/10", text: "text-blue-500 dark:text-blue-400" },
-                                    { label: "Goal Updates", color: "bg-purple-50 dark:bg-purple-500/10", text: "text-purple-500 dark:text-purple-400" }
-                                ].map((action, i) => (
+                                {portalActions.map((action, i) => (
+
                                     <div key={i} className={`p-4 rounded-xl border border-gray-100 dark:border-white/10 flex flex-col items-center justify-center gap-3 hover:bg-gray-50 dark:hover:bg-white/5 cursor-pointer transition-colors`}>
                                         <div className={`w-10 h-10 rounded-full ${action.color} ${action.text} flex items-center justify-center transition-colors`}>
                                             <div className="w-5 h-5 rounded border border-current opacity-70 transition-colors" />
@@ -82,13 +74,14 @@ export default function SelfServicePortalSection() {
                                 <div className="flex items-center justify-between bg-white dark:bg-white/5 p-3 rounded-lg border border-gray-100 dark:border-white/5 transition-colors">
                                     <div className="flex items-center gap-3">
                                         <div className="w-10 h-10 rounded-lg bg-orange-50 dark:bg-orange-500/10 text-orange-500 dark:text-orange-400 flex flex-col items-center justify-center font-bold text-xs uppercase leading-none transition-colors">
-                                            <span>Apr</span>
-                                            <span className="text-base text-dark dark:text-white transition-colors">12</span>
+                                            <span>{upcomingLeave.month}</span>
+                                            <span className="text-base text-dark dark:text-white transition-colors">{upcomingLeave.day}</span>
                                         </div>
                                         <div>
-                                            <div className="text-sm font-medium text-dark dark:text-white transition-colors">Annual Leave</div>
-                                            <div className="text-xs text-gray-500 dark:text-gray-400 transition-colors">3 Days • Approved</div>
+                                            <div className="text-sm font-medium text-dark dark:text-white transition-colors">{upcomingLeave.type}</div>
+                                            <div className="text-xs text-gray-500 dark:text-gray-400 transition-colors">{upcomingLeave.duration}</div>
                                         </div>
+
                                     </div>
                                 </div>
                             </div>
@@ -124,14 +117,19 @@ export default function SelfServicePortalSection() {
                         Give your employees the autonomy to manage their own HR needs without bottlenecking your HR department. A beautiful, intuitive portal accessible from anywhere.
                     </p>
 
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-4 gap-x-8">
-                        {tasks.map((task, idx) => (
+                    <motion.div 
+                        variants={staggerContainer}
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={{ once: true }}
+                        className="grid grid-cols-1 sm:grid-cols-2 gap-y-4 gap-x-8"
+                    >
+                        {portalTasks.map((task, idx) => (
+
                             <motion.div
                                 key={idx}
-                                initial={{ opacity: 0, x: 20 }}
-                                whileInView={{ opacity: 1, x: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ duration: 0.4, delay: idx * 0.1 }}
+                                variants={fadeUp}
+                                whileHover={{ x: 5, transition: { duration: 0.2 } }}
                                 className="flex items-center gap-3 group"
                             >
                                 <div className="flex-shrink-0 w-6 h-6 rounded-full bg-lightSky dark:bg-white/10 text-primary dark:text-[#3ec3ff] flex items-center justify-center group-hover:bg-primary dark:group-hover:bg-[#3ec3ff] group-hover:text-white transition-colors">
@@ -140,7 +138,7 @@ export default function SelfServicePortalSection() {
                                 <span className="text-dark dark:text-gray-200 font-medium transition-colors">{task}</span>
                             </motion.div>
                         ))}
-                    </div>
+                    </motion.div>
 
                 </div>
 

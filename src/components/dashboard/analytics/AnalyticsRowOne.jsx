@@ -1,8 +1,11 @@
 import React from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend, PieChart, Pie, Cell, LineChart, Line, AreaChart, Area } from 'recharts';
 import { ArrowUpRight, ArrowDownRight, Clock } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 import { useTheme } from '@/context/ThemeContext';
-import { salaryData, revenueBarData, balanceData } from "@/datasets";
+import CountUp from 'react-countup';
+import { salaryData, revenueBarData, balanceData, overallStats } from "@/datasets";
 
 const CustomTooltip = ({ active, payload, label, isDarkMode }) => {
     if (active && payload && payload.length) {
@@ -10,7 +13,7 @@ const CustomTooltip = ({ active, payload, label, isDarkMode }) => {
             <div className={`p-3 border rounded-lg shadow-lg ${isDarkMode ? 'bg-[#0c162d] border-white/10' : 'bg-white border-borderColor'}`}>
                 <p className={`font-medium text-sm mb-2 ${isDarkMode ? 'text-white' : 'text-dark'}`}>{label}</p>
                 {payload.map((entry, index) => (
-                    <p key={index} className="text-sm font-semibold capitalize" style={{ color: entry.color }}>
+                    <p key={index} className="text-sm font-semibold capitalize" style={{ color: entry.color || entry.fill }}>
                         {entry.name}: {entry.value}
                     </p>
                 ))}
@@ -61,20 +64,28 @@ const CircularProgress = ({ percentage, isDarkMode }) => {
 
 export default function AnalyticsRowOne() {
     const { isDarkMode } = useTheme();
+    const navigate = useNavigate();
 
     return (
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6 relative">
 
             {/* Card 1: Salary Statistics */}
-            <div className={`rounded-[10px] border flex flex-col h-[480px] transition-all ${isDarkMode ? 'bg-[#0c162d]/50 backdrop-blur-md border-white/10 shadow-2xl' : 'bg-white border-borderColor shadow-[0px_10px_25px_rgba(0,0,0,0.08)]'}`}>
-                <div className={`p-5 border-b flex justify-between items-center ${isDarkMode ? 'border-white/10' : 'border-borderColor'}`}>
+            <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.1 }}
+                className={`rounded-[10px] border flex flex-col h-[480px] transition-all relative overflow-hidden group ${isDarkMode ? 'bg-[#0c162d]/50 backdrop-blur-md border-white/10 shadow-2xl' : 'bg-white border-borderColor shadow-[0px_10px_25px_rgba(0,0,0,0.08)]'}`}
+            >
+                <div className="absolute top-0 right-0 w-32 h-32 -mr-16 -mt-16 bg-blue-500/5 rounded-full pointer-events-none group-hover:scale-150 transition-transform duration-700" />
+                <div className={`p-5 border-b flex justify-between items-center relative z-10 ${isDarkMode ? 'border-white/10' : 'border-borderColor'}`}>
                     <h3 className={`font-headings font-bold text-[18px] lg:text-[20px] ${isDarkMode ? 'text-white' : 'text-dark'}`}>Salary Statistics</h3>
                     <div className="w-10 h-5 bg-primary/20 rounded-full relative cursor-pointer flex items-center p-1">
                         <div className="w-4 h-4 bg-primary rounded-full absolute right-1"></div>
                     </div>
                 </div>
 
-                <div className="p-5 flex-1 w-full relative">
+                <div className="p-5 flex-1 w-full relative z-10">
                     <ResponsiveContainer width="100%" height="100%">
                         <BarChart data={salaryData} margin={{ top: 10, right: 0, left: -20, bottom: 0 }}>
                             <CartesianGrid strokeDasharray="3 3" vertical={false} stroke={isDarkMode ? "rgba(255,255,255,0.05)" : "#E2E8F0"} />
@@ -90,27 +101,39 @@ export default function AnalyticsRowOne() {
                     </ResponsiveContainer>
                 </div>
 
-                <div className={`p-4 border-t w-full flex justify-center ${isDarkMode ? 'border-white/10 bg-white/5' : 'border-borderColor bg-gray-50/30'}`}>
-                    <button className="text-[13px] font-bold text-primary dark:text-[#3ec3ff] hover:text-secondary dark:hover:text-[#3ec3ff]/80 hover:underline transition-all">
+                <div className={`p-4 border-t w-full flex justify-center relative z-10 ${isDarkMode ? 'border-white/10 bg-white/5' : 'border-borderColor bg-gray-50/30'}`}>
+                    <button 
+                        onClick={() => navigate('/dashboard/reports')}
+                        className="text-[13px] font-bold text-primary dark:text-[#3ec3ff] hover:text-secondary dark:hover:text-[#3ec3ff]/80 hover:underline transition-all"
+                    >
                         GENERATE REPORT
                     </button>
                 </div>
-            </div>
+            </motion.div>
 
             {/* Card 2: Revenue */}
-            <div className={`rounded-[10px] border flex flex-col h-[480px] transition-all ${isDarkMode ? 'bg-[#0c162d]/50 backdrop-blur-md border-white/10 shadow-2xl' : 'bg-white border-borderColor shadow-[0px_10px_25px_rgba(0,0,0,0.08)]'}`}>
-                <div className={`p-5 border-b ${isDarkMode ? 'border-white/10' : 'border-borderColor'}`}>
+            <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.2 }}
+                className={`rounded-[10px] border flex flex-col h-[480px] transition-all relative overflow-hidden group ${isDarkMode ? 'bg-[#0c162d]/50 backdrop-blur-md border-white/10 shadow-2xl' : 'bg-white border-borderColor shadow-[0px_10px_25px_rgba(0,0,0,0.08)]'}`}
+            >
+                <div className="absolute top-0 right-0 w-32 h-32 -mr-16 -mt-16 bg-emerald-500/5 rounded-full pointer-events-none group-hover:scale-150 transition-transform duration-700" />
+                <div className={`p-5 border-b relative z-10 ${isDarkMode ? 'border-white/10' : 'border-borderColor'}`}>
                     <h3 className={`font-headings font-bold text-[18px] lg:text-[20px] ${isDarkMode ? 'text-white' : 'text-dark'}`}>Revenue</h3>
                 </div>
 
-                <div className="flex-1 flex flex-col items-center justify-center p-4 gap-4 relative">
-                    <CircularProgress percentage={82} isDarkMode={isDarkMode} />
+                <div className="flex-1 flex flex-col items-center justify-center p-4 gap-4 relative z-10">
+                    <CircularProgress percentage={overallStats.revenuePercentage} isDarkMode={isDarkMode} />
 
                     <div className="text-center">
-                        <h2 className={`text-3xl font-bold font-headings ${isDarkMode ? 'text-white' : 'text-dark'}`}>124,301</h2>
+                        <h2 className={`text-3xl font-bold font-headings ${isDarkMode ? 'text-white' : 'text-dark'}`}>
+                            <CountUp end={overallStats.totalRevenue} duration={2.5} separator="," />
+                        </h2>
                         <div className="flex items-center justify-center gap-1 text-green-500 font-semibold text-sm mt-1">
                             <ArrowUpRight size={16} />
-                            <span>+3.7%</span>
+                            <span>{overallStats.revenueGrowth}</span>
                         </div>
                     </div>
 
@@ -123,23 +146,35 @@ export default function AnalyticsRowOne() {
                     </div>
                 </div>
 
-                <div className={`p-4 border-t w-full flex justify-center ${isDarkMode ? 'border-white/10 bg-white/5' : 'border-borderColor bg-gray-50/30'}`}>
-                    <button className="text-[13px] font-bold text-primary dark:text-[#3ec3ff] hover:text-secondary dark:hover:text-[#3ec3ff]/80 hover:underline transition-all">
+                <div className={`p-4 border-t w-full flex justify-center relative z-10 ${isDarkMode ? 'border-white/10 bg-white/5' : 'border-borderColor bg-gray-50/30'}`}>
+                    <button 
+                        onClick={() => navigate('/dashboard/reports')}
+                        className="text-[13px] font-bold text-primary dark:text-[#3ec3ff] hover:text-secondary dark:hover:text-[#3ec3ff]/80 hover:underline transition-all"
+                    >
                         SEND REPORT
                     </button>
                 </div>
-            </div>
+            </motion.div>
 
             {/* Card 3: My Balance */}
-            <div className={`rounded-[10px] border flex flex-col h-[480px] transition-all ${isDarkMode ? 'bg-[#0c162d]/50 backdrop-blur-md border-white/10 shadow-2xl' : 'bg-white border-borderColor shadow-[0px_10px_25px_rgba(0,0,0,0.08)]'}`}>
-                <div className={`p-5 border-b ${isDarkMode ? 'border-white/10' : 'border-borderColor'}`}>
+            <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.3 }}
+                className={`rounded-[10px] border flex flex-col h-[480px] transition-all relative overflow-hidden group ${isDarkMode ? 'bg-[#0c162d]/50 backdrop-blur-md border-white/10 shadow-2xl' : 'bg-white border-borderColor shadow-[0px_10px_25px_rgba(0,0,0,0.08)]'}`}
+            >
+                <div className="absolute top-0 right-0 w-32 h-32 -mr-16 -mt-16 bg-indigo-500/5 rounded-full pointer-events-none group-hover:scale-150 transition-transform duration-700" />
+                <div className={`p-5 border-b relative z-10 ${isDarkMode ? 'border-white/10' : 'border-borderColor'}`}>
                     <h3 className={`font-headings font-bold text-[18px] lg:text-[20px] ${isDarkMode ? 'text-white' : 'text-dark'}`}>My Balance</h3>
                 </div>
 
-                <div className="p-5 flex-1 flex flex-col">
+                <div className="p-5 flex-1 flex flex-col relative z-10">
                     <div className="mb-2">
                         <p className={`text-sm font-medium mb-1 ${isDarkMode ? 'text-gray-400' : 'text-textSecondary'}`}>Balance</p>
-                        <h2 className={`text-3xl lg:text-4xl font-bold font-headings ${isDarkMode ? 'text-white' : 'text-dark'}`}>$20,508</h2>
+                        <h2 className={`text-3xl lg:text-4xl font-bold font-headings ${isDarkMode ? 'text-white' : 'text-dark'}`}>
+                            $<CountUp end={overallStats.totalBalance} duration={2.5} separator="," />
+                        </h2>
                     </div>
 
                     <div className="w-full h-24 -ml-2 mb-6">
@@ -151,27 +186,24 @@ export default function AnalyticsRowOne() {
                     </div>
 
                     <div className="space-y-4">
-                        <div className={`flex justify-between items-center pb-3 border-b ${isDarkMode ? 'border-white/5' : 'border-borderColor/50'}`}>
-                            <span className={`text-sm font-semibold ${isDarkMode ? 'text-gray-500' : 'text-textSecondary'}`}>Bank of America</span>
-                            <span className={`text-[17px] font-bold ${isDarkMode ? 'text-gray-200' : 'text-dark'}`}>$15,025</span>
-                        </div>
-                        <div className={`flex justify-between items-center pb-3 border-b ${isDarkMode ? 'border-white/5' : 'border-borderColor/50'}`}>
-                            <span className={`text-sm font-semibold ${isDarkMode ? 'text-gray-500' : 'text-textSecondary'}`}>RBC Bank</span>
-                            <span className={`text-[17px] font-bold ${isDarkMode ? 'text-gray-200' : 'text-dark'}`}>$1,843</span>
-                        </div>
-                        <div className="flex justify-between items-center pb-1">
-                            <span className={`text-sm font-semibold ${isDarkMode ? 'text-gray-500' : 'text-textSecondary'}`}>Frost Bank</span>
-                            <span className={`text-[17px] font-bold ${isDarkMode ? 'text-gray-200' : 'text-dark'}`}>$27</span>
-                        </div>
+                        {overallStats.bankBalances.map((bank, i) => (
+                            <div key={i} className={`flex justify-between items-center pb-3 border-b last:border-0 ${isDarkMode ? 'border-white/5' : 'border-borderColor/50'}`}>
+                                <span className={`text-sm font-semibold ${isDarkMode ? 'text-gray-500' : 'text-textSecondary'}`}>{bank.name}</span>
+                                <span className={`text-[17px] font-bold ${isDarkMode ? 'text-gray-200' : 'text-dark'}`}>${bank.amount.toLocaleString()}</span>
+                            </div>
+                        ))}
                     </div>
                 </div>
 
-                <div className={`p-4 border-t w-full flex justify-center ${isDarkMode ? 'border-white/10 bg-white/5' : 'border-borderColor bg-gray-50/30'}`}>
-                    <button className="text-[13px] font-bold text-primary dark:text-[#3ec3ff] hover:text-secondary dark:hover:text-[#3ec3ff]/80 hover:underline transition-all">
+                <div className={`p-4 border-t w-full flex justify-center relative z-10 ${isDarkMode ? 'border-white/10 bg-white/5' : 'border-borderColor bg-gray-50/30'}`}>
+                    <button 
+                        onClick={() => navigate('/dashboard/payroll')}
+                        className="text-[13px] font-bold text-primary dark:text-[#3ec3ff] hover:text-secondary dark:hover:text-[#3ec3ff]/80 hover:underline transition-all"
+                    >
                         VIEW MORE
                     </button>
                 </div>
-            </div>
+            </motion.div>
 
         </div>
     );

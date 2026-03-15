@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Search, Mail, Printer, Trash2, ChevronLeft, ChevronRight } from 'lucide-react';
 import { StatusBadge, SearchHeader, PaginationFooter } from '@/components/common';
-import { mockExpenses, mockInvoices, expenseStats } from '@/datasets';
+import { mockExpenses, mockInvoices, expenseStats, invoiceStats, invoiceDetailInfo, invoiceProducts, invoiceSummary } from '@/datasets';
 import { useTheme } from '@/context/ThemeContext';
 
 export default function Reports() {
@@ -75,11 +75,7 @@ export default function Reports() {
         <div className="flex flex-col gap-6">
             {/* Stat Cards */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-                {[
-                    { value: '562', label: 'Total Approved' },
-                    { value: '254', label: 'Pending Invoice' },
-                    { value: '982', label: 'Closed' }
-                ].map((stat, index) => (
+                {invoiceStats.map((stat, index) => (
                     <div key={index} className={`p-6 rounded-[10px] border flex flex-col items-center justify-center text-center transition-all hover:-translate-y-1 duration-300 ${isDarkMode ? 'bg-[#0c162d]/50 backdrop-blur-md border-white/10 shadow-xl' : 'bg-white shadow-[0px_10px_25px_rgba(0,0,0,0.08)] border-borderColor'}`}>
                         <h3 className={`text-4xl font-bold font-headings mb-1 ${isDarkMode ? 'text-[#3ec3ff]' : 'text-primary'}`}>{stat.value}</h3>
                         <p className={`text-sm font-medium ${isDarkMode ? 'text-gray-400' : 'text-textSecondary'}`}>{stat.label}</p>
@@ -115,7 +111,7 @@ export default function Reports() {
                                             {inv.status}
                                         </span>
                                     </td>
-                                    <td className={`px-4 py-3 text-[14px] font-bold ${isDarkMode ? 'text-white' : 'text-dark'}`}>{inv.amount}</td>
+                                    <td className={`px-4 py-4 text-right font-semibold ${isDarkMode ? 'text-[#3ec3ff]' : 'text-dark'}`}>{inv.amount}</td>
                                     <td className="px-4 py-3">
                                         <div className="flex items-center justify-center gap-2 opacity-60 group-hover:opacity-100 transition-opacity">
                                             <button className={`p-1.5 transition-all rounded-md ${isDarkMode ? 'text-gray-400 hover:text-[#3ec3ff] hover:bg-white/5' : 'text-textSecondary hover:text-primary hover:bg-lightSky'}`} title="Email"><Mail size={16} /></button>
@@ -140,7 +136,7 @@ export default function Reports() {
             <div className={`flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b pb-6 ${isDarkMode ? 'border-white/10' : 'border-borderColor'}`}>
                 <div>
                     <h2 className={`text-2xl font-bold font-headings uppercase ${isDarkMode ? 'text-white' : 'text-dark'}`}>INVOICE</h2>
-                    <p className={`font-medium mt-1 ${isDarkMode ? 'text-gray-500' : 'text-textSecondary'}`}>#AB0017</p>
+                    <p className={`font-medium mt-1 ${isDarkMode ? 'text-gray-500' : 'text-textSecondary'}`}>{invoiceDetailInfo.id}</p>
                 </div>
                 <button className={`flex items-center gap-2 px-5 py-2.5 rounded-md transition-all font-medium text-sm shadow-lg hover:-translate-y-0.5 active:scale-95 ${isDarkMode ? 'bg-[#3ec3ff] text-dark hover:bg-[#3ec3ff]/90 shadow-[0_4px_15px_rgba(62,195,255,0.3)]' : 'bg-primary text-white hover:bg-sky-400 shadow-[0px_4px_10px_rgba(56,189,248,0.3)]'}`}>
                     <Printer size={18} />
@@ -152,22 +148,18 @@ export default function Reports() {
             <div className={`grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 pb-6 border-b ${isDarkMode ? 'border-white/10' : 'border-borderColor'}`}>
                 <div>
                     <p className={`text-xs font-bold uppercase tracking-wider mb-2 ${isDarkMode ? 'text-gray-500' : 'text-textSecondary'}`}>Company</p>
-                    <p className={`font-semibold text-[15px] mb-1 ${isDarkMode ? 'text-gray-200' : 'text-dark'}`}>NEXI5 HRM Portal</p>
+                    <p className={`font-semibold text-[15px] mb-1 ${isDarkMode ? 'text-gray-200' : 'text-dark'}`}>{invoiceDetailInfo.company.name}</p>
                     <p className={`text-[14px] leading-relaxed ${isDarkMode ? 'text-gray-400' : 'text-textSecondary'}`}>
-                        Street Address<br />
-                        State, City<br />
-                        Region, Postal Code<br />
-                        ltd@example.com
+                        {invoiceDetailInfo.company.address.split('\n').map((line, i) => <span key={i}>{line}<br /></span>)}
+                        {invoiceDetailInfo.company.email}
                     </p>
                 </div>
                 <div>
                     <p className={`text-xs font-bold uppercase tracking-wider mb-2 ${isDarkMode ? 'text-gray-500' : 'text-textSecondary'}`}>Client</p>
-                    <p className={`font-semibold text-[15px] mb-1 ${isDarkMode ? 'text-gray-200' : 'text-dark'}`}>Client Name</p>
+                    <p className={`font-semibold text-[15px] mb-1 ${isDarkMode ? 'text-gray-200' : 'text-dark'}`}>{invoiceDetailInfo.client.name}</p>
                     <p className={`text-[14px] leading-relaxed ${isDarkMode ? 'text-gray-400' : 'text-textSecondary'}`}>
-                        Street Address<br />
-                        State, City<br />
-                        Region, Postal Code<br />
-                        ctr@example.com
+                        {invoiceDetailInfo.client.address.split('\n').map((line, i) => <span key={i}>{line}<br /></span>)}
+                        {invoiceDetailInfo.client.email}
                     </p>
                 </div>
             </div>
@@ -185,11 +177,7 @@ export default function Reports() {
                         </tr>
                     </thead>
                     <tbody>
-                        {[
-                            { id: 1, name: 'Logo Creation', desc: 'Logo and business cards design', qnt: 1, unit: '$1,800', amount: '$1,800' },
-                            { id: 2, name: 'Online Store Design & Development', desc: 'Design/Development for modern browsers', qnt: 1, unit: '$20,000', amount: '$20,000' },
-                            { id: 3, name: 'App Design', desc: 'Promotional mobile application', qnt: 1, unit: '$3,200', amount: '$3,200' }
-                        ].map((item) => (
+                        {invoiceProducts.map((item) => (
                             <tr key={item.id} className={`border-b transition-colors ${isDarkMode ? 'border-white/5 hover:bg-white/5' : 'border-borderColor hover:bg-[#F1F5F9]'}`}>
                                 <td className={`px-4 py-4 text-center font-medium ${isDarkMode ? 'text-gray-500' : 'text-textSecondary'}`}>{item.id}</td>
                                 <td className="px-4 py-4">
@@ -210,19 +198,19 @@ export default function Reports() {
                 <div className="w-full sm:w-80 flex flex-col gap-3 text-sm">
                     <div className="flex justify-between items-center px-4">
                         <span className={isDarkMode ? 'text-gray-500 font-medium' : 'text-textSecondary font-medium'}>Subtotal</span>
-                        <span className={isDarkMode ? 'text-gray-200 font-semibold' : 'text-dark font-semibold'}>$25,000</span>
+                        <span className={isDarkMode ? 'text-gray-200 font-semibold' : 'text-dark font-semibold'}>{invoiceSummary.subtotal}</span>
                     </div>
                     <div className="flex justify-between items-center px-4">
                         <span className={isDarkMode ? 'text-gray-500 font-medium' : 'text-textSecondary font-medium'}>VAT Rate</span>
-                        <span className={isDarkMode ? 'text-gray-200 font-semibold' : 'text-dark font-semibold'}>20%</span>
+                        <span className={isDarkMode ? 'text-gray-200 font-semibold' : 'text-dark font-semibold'}>{invoiceSummary.vatRate}</span>
                     </div>
                     <div className={`flex justify-between items-center px-4 pb-3 border-b ${isDarkMode ? 'border-white/10' : 'border-borderColor'}`}>
                         <span className={isDarkMode ? 'text-gray-500 font-medium' : 'text-textSecondary font-medium'}>VAT Due</span>
-                        <span className={isDarkMode ? 'text-gray-200 font-semibold' : 'text-dark font-semibold'}>$5,000</span>
+                        <span className={isDarkMode ? 'text-gray-200 font-semibold' : 'text-dark font-semibold'}>{invoiceSummary.vatDue}</span>
                     </div>
                     <div className={`flex justify-between items-center p-4 rounded-lg shadow-lg transition-all ${isDarkMode ? 'bg-[#3ec3ff] text-dark shadow-[0_4px_15px_rgba(62,195,255,0.3)]' : 'bg-primary text-white shadow-[0px_4px_10px_rgba(56,189,248,0.3)]'}`}>
                         <span className="font-bold text-base uppercase tracking-wider">Total Due</span>
-                        <span className="font-bold text-xl font-headings">$30,000</span>
+                        <span className="font-bold text-xl font-headings">{invoiceSummary.totalDue}</span>
                     </div>
                 </div>
             </div>

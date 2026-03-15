@@ -4,9 +4,20 @@ import { Eye, Edit2, Trash2, Plus } from 'lucide-react';
 import { BarChart, Bar, ResponsiveContainer } from 'recharts';
 import { useTheme } from '@/context/ThemeContext';
 import { PaginationFooter, SearchHeader } from '@/components/common';
-import { employeesData, employeeStatCharts } from '@/datasets';
+import { 
+    employeeMetrics, 
+    employeesData, 
+    employeeStatCharts 
+} from '@/datasets';
 
 const { statData1, statData2 } = employeeStatCharts;
+
+const colorMap = {
+    primary: (isDarkMode) => isDarkMode ? "#3ec3ff" : "#38BDF8",
+    secondary: () => "#2563EB",
+    cyan: () => "#06B6D4",
+    amber: () => "#F59E0B"
+};
 
 const StatCard = ({ title, value, data, color, isDarkMode }) => (
     <div className={`p-6 rounded-[10px] border flex justify-between items-center hover:-translate-y-1 transition-all ${isDarkMode ? 'bg-[#0c162d]/50 backdrop-blur-md border-white/10 shadow-2xl' : 'bg-white border-borderColor shadow-[0px_10px_30px_rgba(0,0,0,0.08)]'}`}>
@@ -65,10 +76,16 @@ export default function Employees() {
 
             {/* Stat Cards */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
-                <StatCard title="Total Employee" value="614" data={statData1} color={isDarkMode ? "#3ec3ff" : "#38BDF8"} isDarkMode={isDarkMode} />
-                <StatCard title="New Employee" value="124" data={statData2} color="#2563EB" isDarkMode={isDarkMode} />
-                <StatCard title="Male" value="504" data={statData1} color="#06B6D4" isDarkMode={isDarkMode} />
-                <StatCard title="Female" value="110" data={statData2} color="#F59E0B" isDarkMode={isDarkMode} />
+                {employeeMetrics.map((metric, idx) => (
+                    <StatCard 
+                        key={idx}
+                        title={metric.title} 
+                        value={metric.value} 
+                        data={idx % 2 === 0 ? statData1 : statData2} 
+                        color={colorMap[metric.colorKey](isDarkMode)} 
+                        isDarkMode={isDarkMode} 
+                    />
+                ))}
             </div>
 
             {/* Employee List Card */}

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Search, DollarSign, Download, Filter, Mail, Printer, Trash2, Eye, BarChart3, Activity, PieChart, LineChart, TrendingUp, TrendingDown } from 'lucide-react';
 import '@/index.css';
 import { PaginationFooter } from '@/components/common';
-import { payrollData, payrollStats } from '@/datasets';
+import { payrollData, payrollStats, payslipMockInfo, payslipMockRows, payslipSummary } from '@/datasets';
 import { useTheme } from '@/context/ThemeContext';
 
 const iconMap = {
@@ -19,14 +19,13 @@ const PayslipView = ({ isDarkMode }) => (
         <div className="flex flex-col md:flex-row justify-between items-start gap-4">
             <div className="flex items-start gap-4">
                 <div className={`w-16 h-16 rounded-full flex items-center justify-center font-bold font-headings text-2xl shrink-0 border ${isDarkMode ? 'bg-white/5 text-[#3ec3ff] border-[#3ec3ff]/20' : 'bg-lightSky text-primary border-primary/20'}`}>
-                    JS
+                    {payslipMockInfo.initials}
                 </div>
                 <div>
-                    <h2 className={`text-xl font-bold font-headings ${isDarkMode ? 'text-white' : 'text-dark'}`}>John Smith</h2>
-                    <p className={`text-sm font-medium mb-2 ${isDarkMode ? 'text-gray-400' : 'text-textSecondary'}`}>Order ID: <span className={isDarkMode ? 'text-gray-200' : 'text-dark'}>C09</span></p>
+                    <h2 className={`text-xl font-bold font-headings ${isDarkMode ? 'text-white' : 'text-dark'}`}>{payslipMockInfo.name}</h2>
+                    <p className={`text-sm font-medium mb-2 ${isDarkMode ? 'text-gray-400' : 'text-textSecondary'}`}>Order ID: <span className={isDarkMode ? 'text-gray-200' : 'text-dark'}>{payslipMockInfo.id}</span></p>
                     <p className={`text-sm max-w-xs ${isDarkMode ? 'text-gray-500' : 'text-textSecondary'}`}>
-                        795 Folsom Ave, Suite 546<br />
-                        San Francisco, CA 54656
+                        {payslipMockInfo.address.split('\n').map((line, i) => <span key={i}>{line}<br /></span>)}
                     </p>
                     <div className="flex gap-2 mt-3">
                         <button className={`p-1.5 transition-all rounded-md ${isDarkMode ? 'text-gray-400 hover:text-[#3ec3ff] hover:bg-white/5' : 'text-textSecondary hover:text-primary hover:bg-lightSky'}`} title="Email">
@@ -40,7 +39,7 @@ const PayslipView = ({ isDarkMode }) => (
             </div>
 
             <div className={`px-4 py-1.5 rounded-full text-sm font-semibold tracking-wide ${isDarkMode ? 'bg-[#3ec3ff] text-dark shadow-[0_0_15px_rgba(62,195,255,0.3)]' : 'bg-[#1F2937] text-white'}`}>
-                Jun 15, 2019
+                {payslipMockInfo.date}
             </div>
         </div>
 
@@ -57,13 +56,7 @@ const PayslipView = ({ isDarkMode }) => (
                     </tr>
                 </thead>
                 <tbody>
-                    {[
-                        { id: '01', desc: 'Basic Salary', earn: '$1,500', ded: '', total: '$380' },
-                        { id: '02', desc: 'House Rent Allowance (H.R.A.)', earn: '$62', ded: '', total: '$250' },
-                        { id: '03', desc: 'Tax Deducted at Source (T.D.S.)', earn: '', ded: '$80', total: '$120' },
-                        { id: '04', desc: 'C/Bank Loan', earn: '', ded: '$120', total: '$120' },
-                        { id: '05', desc: 'Other Allowance', earn: '$121', ded: '', total: '$120' }
-                    ].map((row, idx) => (
+                    {payslipMockRows.map((row, idx) => (
                         <tr key={idx} className={`border-b transition-colors h-[56px] ${isDarkMode ? 'border-white/5 hover:bg-white/5' : 'border-borderColor hover:bg-[#F1F5F9]'}`}>
                             <td className={`px-4 py-3 text-center font-medium ${isDarkMode ? 'text-gray-500' : 'text-textSecondary'}`}>{row.id}</td>
                             <td className={`px-4 py-3 font-medium ${isDarkMode ? 'text-gray-300' : 'text-dark'}`}>{row.desc}</td>
@@ -84,18 +77,19 @@ const PayslipView = ({ isDarkMode }) => (
             <div className="flex flex-col gap-2 text-sm">
                 <div className="flex justify-between gap-12">
                     <span className={`font-medium ${isDarkMode ? 'text-gray-400' : 'text-textSecondary'}`}>Total Earnings:</span>
-                    <span className={`font-semibold ${isDarkMode ? 'text-white' : 'text-dark'}`}>$1683</span>
+                    <span className={`font-semibold ${isDarkMode ? 'text-white' : 'text-dark'}`}>{payslipSummary.totalEarnings}</span>
                 </div>
                 <div className="flex justify-between gap-12">
                     <span className={`font-medium ${isDarkMode ? 'text-gray-400' : 'text-textSecondary'}`}>Total Deductions:</span>
-                    <span className={`font-semibold ${isDarkMode ? 'text-white' : 'text-dark'}`}>$200</span>
+                    <span className={`font-semibold ${isDarkMode ? 'text-white' : 'text-dark'}`}>{payslipSummary.totalDeductions}</span>
                 </div>
             </div>
             <div className={`px-6 py-3 rounded-lg border flex flex-col shadow-lg transition-all ${isDarkMode ? 'bg-[#3ec3ff]/10 border-[#3ec3ff]/20 shadow-[0_0_20px_rgba(62,195,255,0.1)]' : 'bg-lightSky border-primary/20'}`}>
                 <span className={`text-xs font-semibold uppercase mb-1 ${isDarkMode ? 'text-[#3ec3ff]' : 'text-primary'}`}>Final Salary</span>
-                <span className={`text-2xl font-bold font-headings ${isDarkMode ? 'text-[#3ec3ff]' : 'text-primary'}`}>$1483.00</span>
+                <span className={`text-2xl font-bold font-headings ${isDarkMode ? 'text-[#3ec3ff]' : 'text-primary'}`}>{payslipSummary.finalSalary}</span>
             </div>
         </div>
+
 
         <div className="flex justify-end mt-2">
             <button className={`flex items-center gap-2 px-6 py-2.5 rounded-md transition-all font-medium text-sm shadow-md active:scale-95 ${isDarkMode

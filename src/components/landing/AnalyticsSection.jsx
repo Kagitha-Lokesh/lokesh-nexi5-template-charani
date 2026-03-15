@@ -1,30 +1,14 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { LineChart, Line, AreaChart, Area, BarChart, Bar, PieChart, Pie, Cell, ResponsiveContainer, XAxis, Tooltip } from 'recharts';
-import { fadeUp } from '../../animations/variants';
+import { fadeUp, staggerContainer } from '../../animations/variants';
 
-const attendanceData = [
-    { name: 'Mon', val: 92 }, { name: 'Tue', val: 95 }, { name: 'Wed', val: 98 },
-    { name: 'Thu', val: 91 }, { name: 'Fri', val: 88 }, { name: 'Sat', val: 40 }, { name: 'Sun', val: 0 }
-];
+// Datasets
+import {
+    attendanceTrendsData, productivityData, attritionAnalysisData,
+    payrollDistributionData, ANALYTICS_COLORS
+} from '../../datasets/landing/analyticsData';
 
-const productivityData = [
-    { name: 'Jan', val: 65 }, { name: 'Feb', val: 70 }, { name: 'Mar', val: 85 },
-    { name: 'Apr', val: 82 }, { name: 'May', val: 90 }, { name: 'Jun', val: 95 }
-];
-
-const attrationData = [
-    { name: 'Q1', val: 5 }, { name: 'Q2', val: 3 }, { name: 'Q3', val: 8 }, { name: 'Q4', val: 4 }
-];
-
-const payrollData = [
-    { name: 'Engineering', value: 45 },
-    { name: 'Sales', value: 25 },
-    { name: 'Marketing', value: 15 },
-    { name: 'Support', value: 15 }
-];
-
-const COLORS = ['#38BDF8', '#2563EB', '#60A5FA', '#93C5FD'];
 
 export default function AnalyticsSection() {
     return (
@@ -47,15 +31,19 @@ export default function AnalyticsSection() {
                     </p>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <motion.div 
+                    variants={staggerContainer}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true }}
+                    className="grid grid-cols-1 md:grid-cols-2 gap-6"
+                >
 
                     {/* Card 1: Attendance Trends */}
                     <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.5 }}
-                        className="bg-white dark:bg-white/5 dark:backdrop-blur-xl p-6 rounded-2xl shadow-soft border border-white dark:border-white/10 transition-colors"
+                        variants={fadeUp}
+                        whileHover={{ y: -5, transition: { duration: 0.3 } }}
+                        className="bg-white dark:bg-white/5 dark:backdrop-blur-xl p-6 rounded-2xl shadow-soft border border-white dark:border-white/10 hover:shadow-2xl hover:shadow-blue-500/5 transition-all"
                     >
                         <div className="mb-6">
                             <h3 className="font-bold text-dark dark:text-white text-lg transition-colors">Attendance Trends</h3>
@@ -63,7 +51,8 @@ export default function AnalyticsSection() {
                         </div>
                         <div className="h-64">
                             <ResponsiveContainer width="100%" height="100%">
-                                <AreaChart data={attendanceData}>
+                                <AreaChart data={attendanceTrendsData}>
+
                                     <defs>
                                         <linearGradient id="colorVal" x1="0" y1="0" x2="0" y2="1">
                                             <stop offset="5%" stopColor="#38BDF8" stopOpacity={0.3} />
@@ -120,7 +109,8 @@ export default function AnalyticsSection() {
                         </div>
                         <div className="h-64">
                             <ResponsiveContainer width="100%" height="100%">
-                                <BarChart data={attrationData} barSize={40}>
+                                <BarChart data={attritionAnalysisData} barSize={40}>
+
                                     <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{ fill: '#9CA3AF', fontSize: 12 }} dy={10} />
                                     <Tooltip
                                         cursor={{ fill: '#F3F4F6', opacity: 0.1 }}
@@ -151,7 +141,7 @@ export default function AnalyticsSection() {
                                         contentStyle={{ borderRadius: '8px', border: 'none', boxShadow: '0 10px 25px rgba(0,0,0,0.1)', color: '#0F172A' }}
                                     />
                                     <Pie
-                                        data={payrollData}
+                                        data={payrollDistributionData}
                                         cx="50%"
                                         cy="50%"
                                         innerRadius={60}
@@ -160,17 +150,17 @@ export default function AnalyticsSection() {
                                         dataKey="value"
                                         stroke="none"
                                     >
-                                        {payrollData.map((entry, index) => (
-                                            <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                                        {payrollDistributionData.map((entry, index) => (
+                                            <Cell key={`cell-${index}`} fill={ANALYTICS_COLORS[index % ANALYTICS_COLORS.length]} />
                                         ))}
                                     </Pie>
                                 </PieChart>
                             </ResponsiveContainer>
                             {/* Custom Legend */}
                             <div className="absolute right-0 top-1/2 -translate-y-1/2 flex flex-col gap-3">
-                                {payrollData.map((entry, index) => (
+                                {payrollDistributionData.map((entry, index) => (
                                     <div key={index} className="flex items-center gap-2 text-sm">
-                                        <div className="w-3 h-3 rounded-sm opacity-90 hover:opacity-100 transition-opacity" style={{ backgroundColor: COLORS[index % COLORS.length] }} />
+                                        <div className="w-3 h-3 rounded-sm opacity-90 hover:opacity-100 transition-opacity" style={{ backgroundColor: ANALYTICS_COLORS[index % ANALYTICS_COLORS.length] }} />
                                         <span className="text-gray-600 dark:text-gray-300 transition-colors">{entry.name}</span>
                                     </div>
                                 ))}
@@ -178,7 +168,8 @@ export default function AnalyticsSection() {
                         </div>
                     </motion.div>
 
-                </div>
+
+                </motion.div>
 
             </div>
         </motion.section>

@@ -10,3 +10,12 @@ export const employeeStatCharts = {
     statData1: [{ v: 40 }, { v: 70 }, { v: 45 }, { v: 90 }, { v: 65 }],
     statData2: [{ v: 20 }, { v: 40 }, { v: 25 }, { v: 50 }, { v: 35 }]
 };
+
+export const employeeMetrics = [
+    { title: 'Total Employees', value: '152', colorKey: 'primary' },
+    { title: 'New Hires', value: '12', colorKey: 'secondary' },
+    { title: 'Active Today', value: '138', colorKey: 'cyan' },
+    { title: 'On Leave', value: '14', colorKey: 'amber' },
+];
+
+export const departmentHeadOptions = ['John Smith', 'Maryam Amiri', 'Frank Camly', 'Gary Camara'];
