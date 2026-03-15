@@ -50,6 +50,7 @@ export default function AuthLayout({ children }) {
               aria-label="Go to Home"
             >
               <Home size={20} className="transition-transform group-hover:scale-110" />
+              <span className="ml-2 text-[12px] font-medium">Home</span>
             </Link>
           </div>
         </div>
