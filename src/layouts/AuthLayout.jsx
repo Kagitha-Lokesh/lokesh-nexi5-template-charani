@@ -43,14 +43,14 @@ export default function AuthLayout({ children }) {
             </button>
             <Link
               to="/"
-              className={`p-2.5 rounded-full border transition-all group ${isDarkMode
+              className={`flex items-center gap-2 px-4 py-2 rounded-xl border transition-all duration-300 group shadow-sm hover:shadow-md ${isDarkMode
                 ? 'text-white border-white/20 hover:bg-white/10'
                 : 'text-gray-700 border-gray-200 hover:bg-gray-100'
                 }`}
               aria-label="Go to Home"
             >
-              <Home size={20} className="transition-transform group-hover:scale-110" />
-              <span className="ml-2 text-[12px] font-medium">Home</span>
+              <Home size={18} className="transition-transform group-hover:scale-110" />
+              <span className="text-[13px] font-bold tracking-tight">Home</span>
             </Link>
           </div>
         </div>
