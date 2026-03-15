@@ -31,23 +31,30 @@ export default function AboutSection() {
                             <div className="absolute inset-8 rounded-full border border-gray-200 dark:border-white/10 border-dashed transition-colors" />
                             <div className="absolute inset-16 rounded-full border border-primary/20 dark:border-[#3ec3ff]/20 bg-lightSky/30 dark:bg-white/5 transition-colors" />
 
-                            {/* Central Element */}
-                            <div className="w-[100px] h-[100px] rounded-2xl shadow-soft flex items-center justify-center z-10 transform rotate-3 bg-[#0c162d]">
-                                <img src={nexi5Logo} alt="Logo" className="w-[350px] h-[100px] " />
-                            </div>
-
-                            {/* Floating nodes */}
-                            {aboutFloatingNodes.map((node, i) => (
-                                <motion.div
-                                    key={i}
-                                    animate={{ y: [0, -10, 0] }}
-                                    transition={{ duration: 4, repeat: Infinity, delay: node.delay }}
-                                    className={`absolute w-12 h-12 ${node.color} rounded-full flex items-center justify-center text-white shadow-soft z-10`}
-                                    style={{ top: node.top, left: node.left, transform: 'translate(-50%, -50%)' }}
-                                >
-                                    <Users size={20} />
-                                </motion.div>
-                            ))}
+                             {/* Central Element */}
+                             <div className="w-[90px] h-[90px] rounded-full shadow-2xl flex items-center justify-center z-10 bg-[#0c162d] relative group">
+                                 <div className="absolute inset-0 rounded-full bg-primary/20 animate-pulse-slow"></div>
+                                 <Users size={32} className="text-[#3ec3ff] z-20" />
+                                 <div className="absolute -bottom-2 bg-primary dark:bg-[#3ec3ff] text-white dark:text-[#0c162d] text-[10px] font-bold px-2 py-0.5 rounded-full z-30 shadow-lg">
+                                     NEXI5
+                                 </div>
+                             </div>
+ 
+                             {/* Floating nodes */}
+                             {aboutFloatingNodes.map((node, i) => (
+                                 <motion.div
+                                     key={i}
+                                     animate={{ 
+                                         y: [0, -15, 0],
+                                         rotate: [0, 5, -5, 0]
+                                     }}
+                                     transition={{ duration: 5, repeat: Infinity, delay: node.delay, ease: "easeInOut" }}
+                                     className={`absolute w-14 h-14 ${node.color} rounded-full flex items-center justify-center text-white shadow-xl z-20 border-2 border-white dark:border-white/20 hover:scale-110 transition-transform cursor-pointer`}
+                                     style={{ top: node.top, left: node.left, transform: 'translate(-50%, -50%)' }}
+                                 >
+                                     {node.icon}
+                                 </motion.div>
+                             ))}
 
                             {/* Connectors */}
                             <svg className="absolute inset-0 w-full h-full text-gray-200 dark:text-white/10 transition-colors" style={{ zIndex: 0 }}>

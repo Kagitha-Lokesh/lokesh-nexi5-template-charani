@@ -1,4 +1,4 @@
-import { Users, Calendar, DollarSign, Target, FileText, BookOpen } from 'lucide-react';
+import { Users, Calendar, DollarSign, Target, FileText, BookOpen, Briefcase, UserCheck, ShieldCheck } from 'lucide-react';
 import React from 'react';
 
 export const aboutFeatures = [
@@ -11,10 +11,10 @@ export const aboutFeatures = [
 ];
 
 export const aboutFloatingNodes = [
-    { top: '10%', left: '50%', color: 'bg-green-400', delay: 0 },
-    { top: '30%', left: '85%', color: 'bg-blue-400', delay: 1 },
-    { top: '75%', left: '80%', color: 'bg-indigo-400', delay: 2 },
-    { top: '90%', left: '45%', color: 'bg-amber-400', delay: 3 },
-    { top: '70%', left: '15%', color: 'bg-rose-400', delay: 4 },
-    { top: '25%', left: '20%', color: 'bg-teal-400', delay: 5 },
+    { top: '10%', left: '50%', color: 'bg-green-400', delay: 0, icon: <UserCheck size={20} /> },
+    { top: '30%', left: '85%', color: 'bg-blue-400', delay: 1, icon: <Briefcase size={20} /> },
+    { top: '75%', left: '80%', color: 'bg-indigo-400', delay: 2, icon: <DollarSign size={20} /> },
+    { top: '90%', left: '45%', color: 'bg-amber-400', delay: 3, icon: <Calendar size={20} /> },
+    { top: '70%', left: '15%', color: 'bg-rose-400', delay: 4, icon: <Target size={20} /> },
+    { top: '25%', left: '20%', color: 'bg-teal-400', delay: 5, icon: <ShieldCheck size={20} /> },
 ];
