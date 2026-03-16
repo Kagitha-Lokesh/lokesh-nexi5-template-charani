@@ -4,7 +4,6 @@ import Sidebar from '@/components/dashboard/core/Sidebar';
 import Header from '@/components/dashboard/core/Header';
 import FloatingActions from '@/components/dashboard/core/FloatingActions';
 import BottomNav from '@/components/dashboard/core/BottomNav';
-import FloatingAI from '@/components/dashboard/core/FloatingAI';
 
 export default function DashboardLayout({ children, handleLogout }) {
     const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -36,7 +35,6 @@ export default function DashboardLayout({ children, handleLogout }) {
                 </main>
 
                 {/* Floating Action Buttons for Mobile */}
-                <FloatingAI />
                 <FloatingActions />
 
                 {/* Bottom Navigation for Mobile */}
