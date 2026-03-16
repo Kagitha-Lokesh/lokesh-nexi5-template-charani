@@ -1,12 +1,13 @@
 import { useState, useEffect, useRef } from 'react';
 import { useTheme } from '@/context/ThemeContext';
+import { X } from 'lucide-react';
 import ChatMessage from './ChatMessage';
 import ChatInput from './ChatInput';
 import SuggestionList from './SuggestionList';
 import TypingIndicator from './TypingIndicator';
 import { getAIResponse, roleBasedSuggestions, roleBasedTips } from '@/datasets/aiChat';
 
-export default function AIChatbot() {
+export default function AIChatbot({ isFloating = false, onClose }) {
     const { isDarkMode } = useTheme();
     const userRole = localStorage.getItem('userRole') || 'employee';
     const suggestions = roleBasedSuggestions[userRole] || roleBasedSuggestions.default;
@@ -51,19 +52,31 @@ export default function AIChatbot() {
     };
 
     return (
-        <div className={`rounded-[10px] shadow-sm overflow-hidden h-[600px] flex flex-col md:flex-row border transition-all duration-300 ${
+        <div className={`rounded-xl shadow-2xl overflow-hidden flex flex-col md:flex-row border transition-all duration-300 ${
+            isFloating ? 'h-full w-full' : 'h-[600px]'
+        } ${
             isDarkMode 
-            ? 'bg-[#0f172a]/80 backdrop-blur-xl border-white/10 text-white' 
+            ? 'bg-[#0f172a]/95 backdrop-blur-2xl border-white/10 text-white' 
             : 'bg-white border-gray-200 text-textPrimary'
         }`}>
             {/* Left Side: Conversation Area */}
             <div className={`flex-1 flex flex-col min-w-0 border-r ${isDarkMode ? 'border-white/10' : 'border-gray-100'}`}>
-                <div className={`p-6 border-b ${isDarkMode ? 'border-white/10' : 'border-gray-100'}`}>
-                    <h2 className="text-lg font-semibold italic">NEXI5 AI Assistant</h2>
-                    <p className={`text-sm italic ${isDarkMode ? 'text-gray-400' : 'text-textSecondary'}`}>Ask HR related questions.</p>
+                <div className={`p-4 md:p-6 border-b flex items-center justify-between ${isDarkMode ? 'border-white/10 bg-white/5' : 'border-gray-100 bg-gray-50/50'}`}>
+                    <div>
+                        <h2 className="text-base md:text-lg font-bold">NEXI5 AI Assistant</h2>
+                        <p className={`text-[11px] md:text-sm ${isDarkMode ? 'text-gray-400' : 'text-textSecondary'}`}>HR Copilot • Ask anything</p>
+                    </div>
+                    {isFloating && (
+                        <button 
+                            onClick={onClose}
+                            className={`p-2 rounded-full hover:bg-gray-200 dark:hover:bg-white/10 transition-colors`}
+                        >
+                            <X size={20} />
+                        </button>
+                    )}
                 </div>
 
-                <div className="flex-1 overflow-y-auto p-6 flex flex-col scrollbar-thin dark:scrollbar-thumb-slate-700 scrollbar-thumb-gray-200">
+                <div className="flex-1 overflow-y-auto p-4 md:p-6 flex flex-col scrollbar-thin dark:scrollbar-thumb-slate-700 scrollbar-thumb-gray-200">
                     <div className="flex-1" /> {/* Spacer to push messages to bottom */}
                     {messages.map((msg) => (
                         <ChatMessage 
@@ -77,13 +90,13 @@ export default function AIChatbot() {
                     <div ref={messagesEndRef} />
                 </div>
 
-                <div className={`p-6 ${isDarkMode ? 'bg-white/5' : 'bg-gray-50/50'}`}>
+                <div className={`p-4 md:p-6 ${isDarkMode ? 'bg-white/5' : 'bg-white shadow-[0_-4px_10px_rgba(0,0,0,0.03)]'}`}>
                     <ChatInput onSendMessage={handleSendMessage} />
                 </div>
             </div>
 
-            {/* Right Side: Suggestions Panel */}
-            <div className={`w-full md:w-80 p-6 ${isDarkMode ? 'bg-white/5' : 'bg-gray-50'}`}>
+            {/* Right Side: Suggestions Panel - Hidden in mobile floating mode */}
+            <div className={`w-full md:w-80 p-6 ${isFloating ? 'hidden md:block' : ''} ${isDarkMode ? 'bg-white/5' : 'bg-gray-50'}`}>
                 <SuggestionList 
                     suggestions={suggestions} 
                     onSelectSuggestion={handleSendMessage} 

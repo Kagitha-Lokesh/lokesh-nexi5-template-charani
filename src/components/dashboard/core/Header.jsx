@@ -59,18 +59,23 @@ export default function Header({ sidebarOpen, setSidebarOpen, handleLogout }) {
     const settingsRoute = '/dashboard/settings';
 
     return (
-        <header className={`h-[80px] px-4 md:px-6 flex items-center justify-between border-b sticky top-0 z-10 transition-all ${isDarkMode ? 'bg-[#0c162d]/80 backdrop-blur-md border-white/10 text-white' : 'bg-white border-borderColor'}`}>
+        <header className={`h-[56px] lg:h-[80px] px-4 md:px-6 flex items-center justify-between border-b sticky top-0 z-10 transition-all ${isDarkMode ? 'bg-[#0c162d]/80 backdrop-blur-md border-white/10 text-white' : 'bg-white border-borderColor'}`}>
 
             {/* ── Left side ─────────────────────────────────────────────── */}
             <div className="flex items-center gap-4 flex-1">
                 <button
                     onClick={() => setSidebarOpen(!sidebarOpen)}
-                    className="lg:hidden p-2 text-textSecondary dark:text-gray-400 hover:text-primary dark:hover:text-[#3ec3ff] transition-colors"
+                    className="lg:hidden p-2 -ml-2 text-textSecondary dark:text-gray-400 hover:text-primary dark:hover:text-[#3ec3ff] transition-colors"
                 >
-                    <Menu size={24} />
+                    <Menu size={22} />
                 </button>
 
-                <h1 className="text-lg md:text-xl font-semibold hidden sm:block tracking-tight">{pageTitle}</h1>
+                <div className="flex-1 flex justify-center lg:justify-start">
+                    <h1 className="text-base md:text-xl font-bold tracking-tight lg:font-semibold">
+                        <span className="lg:hidden">NEXI5 HRM</span>
+                        <span className="hidden lg:inline">{pageTitle}</span>
+                    </h1>
+                </div>
 
                 <div className="relative hidden md:flex items-center w-full max-w-md ml-4">
                     <Search className={`absolute left-3 ${isDarkMode ? 'text-gray-400' : 'text-textSecondary'}`} size={18} />

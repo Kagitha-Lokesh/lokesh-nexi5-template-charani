@@ -75,7 +75,7 @@ export default function AnalyticsRowOne() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: 0.1 }}
-                className={`rounded-[10px] border flex flex-col h-[480px] transition-all relative overflow-hidden group ${isDarkMode ? 'bg-[#0c162d]/50 backdrop-blur-md border-white/10 shadow-2xl' : 'bg-white border-borderColor shadow-[0px_10px_25px_rgba(0,0,0,0.08)]'}`}
+                className={`rounded-[10px] border flex flex-col h-auto lg:h-[480px] transition-all relative overflow-hidden group ${isDarkMode ? 'bg-[#0c162d]/50 backdrop-blur-md border-white/10 shadow-2xl' : 'bg-white border-borderColor shadow-[0px_10px_25px_rgba(0,0,0,0.08)]'}`}
             >
                 <div className="absolute top-0 right-0 w-32 h-32 -mr-16 -mt-16 bg-blue-500/5 rounded-full pointer-events-none group-hover:scale-150 transition-transform duration-700" />
                 <div className={`p-5 border-b flex justify-between items-center relative z-10 ${isDarkMode ? 'border-white/10' : 'border-borderColor'}`}>
@@ -85,7 +85,17 @@ export default function AnalyticsRowOne() {
                     </div>
                 </div>
 
-                <div className="p-5 flex-1 w-full relative z-10">
+                <div className="p-4 md:p-5 flex-1 w-full h-[180px] md:h-full relative z-10">
+                    <div className="md:hidden mb-4 grid grid-cols-2 gap-2">
+                        <div className="p-2 rounded-lg bg-blue-500/10 border border-blue-500/20">
+                            <span className="text-[10px] uppercase text-gray-500 block">Peak Rate</span>
+                            <span className="text-sm font-bold text-blue-500">92%</span>
+                        </div>
+                        <div className="p-2 rounded-lg bg-emerald-500/10 border border-emerald-500/20">
+                            <span className="text-[10px] uppercase text-gray-500 block">Avg Check-in</span>
+                            <span className="text-sm font-bold text-emerald-500">09:15 AM</span>
+                        </div>
+                    </div>
                     <ResponsiveContainer width="100%" height="100%">
                         <BarChart data={salaryData} margin={{ top: 10, right: 0, left: -20, bottom: 0 }}>
                             <CartesianGrid strokeDasharray="3 3" vertical={false} stroke={isDarkMode ? "rgba(255,255,255,0.05)" : "#E2E8F0"} />
@@ -117,7 +127,7 @@ export default function AnalyticsRowOne() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: 0.2 }}
-                className={`rounded-[10px] border flex flex-col h-[480px] transition-all relative overflow-hidden group ${isDarkMode ? 'bg-[#0c162d]/50 backdrop-blur-md border-white/10 shadow-2xl' : 'bg-white border-borderColor shadow-[0px_10px_25px_rgba(0,0,0,0.08)]'}`}
+                className={`rounded-[10px] border flex flex-col h-auto lg:h-[480px] transition-all relative overflow-hidden group ${isDarkMode ? 'bg-[#0c162d]/50 backdrop-blur-md border-white/10 shadow-2xl' : 'bg-white border-borderColor shadow-[0px_10px_25px_rgba(0,0,0,0.08)]'}`}
             >
                 <div className="absolute top-0 right-0 w-32 h-32 -mr-16 -mt-16 bg-emerald-500/5 rounded-full pointer-events-none group-hover:scale-150 transition-transform duration-700" />
                 <div className={`p-5 border-b relative z-10 ${isDarkMode ? 'border-white/10' : 'border-borderColor'}`}>
@@ -139,9 +149,9 @@ export default function AnalyticsRowOne() {
 
                     <div className="w-full h-[50px] opacity-70">
                         <ResponsiveContainer width="100%" height="100%">
-                            <BarChart data={revenueBarData}>
-                                <Bar dataKey="value" fill={isDarkMode ? "#3ec3ff" : "#38BDF8"} radius={[2, 2, 0, 0]} barSize={12} />
-                            </BarChart>
+                            <AreaChart data={revenueBarData}>
+                                <Area type="monotone" dataKey="value" stroke={isDarkMode ? "#3ec3ff" : "#38BDF8"} fill={isDarkMode ? "#3ec3ff22" : "#38BDF822"} strokeWidth={2} />
+                            </AreaChart>
                         </ResponsiveContainer>
                     </div>
                 </div>
@@ -162,7 +172,7 @@ export default function AnalyticsRowOne() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: 0.3 }}
-                className={`rounded-[10px] border flex flex-col h-[480px] transition-all relative overflow-hidden group ${isDarkMode ? 'bg-[#0c162d]/50 backdrop-blur-md border-white/10 shadow-2xl' : 'bg-white border-borderColor shadow-[0px_10px_25px_rgba(0,0,0,0.08)]'}`}
+                className={`rounded-[10px] border flex flex-col h-auto lg:h-[480px] transition-all relative overflow-hidden group ${isDarkMode ? 'bg-[#0c162d]/50 backdrop-blur-md border-white/10 shadow-2xl' : 'bg-white border-borderColor shadow-[0px_10px_25px_rgba(0,0,0,0.08)]'}`}
             >
                 <div className="absolute top-0 right-0 w-32 h-32 -mr-16 -mt-16 bg-indigo-500/5 rounded-full pointer-events-none group-hover:scale-150 transition-transform duration-700" />
                 <div className={`p-5 border-b relative z-10 ${isDarkMode ? 'border-white/10' : 'border-borderColor'}`}>

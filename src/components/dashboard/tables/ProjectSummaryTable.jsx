@@ -24,6 +24,42 @@ const PaymentBadge = ({ text, isDarkMode }) => {
     return <span className={`px-3 py-1 rounded-md text-xs font-bold ${isDarkMode ? 'bg-white/5 text-gray-400' : 'bg-gray-100 text-gray-600'}`}>{text}</span>;
 };
 
+const MobileCardView = ({ row, isDarkMode, navigate }) => (
+    <div 
+        onClick={() => navigate('/dashboard/project')}
+        className={`p-4 mb-4 rounded-xl border transition-all active:scale-[0.98] ${isDarkMode ? 'bg-white/5 border-white/10' : 'bg-gray-50 border-borderColor'}`}
+    >
+        <div className="flex justify-between items-start mb-3">
+            <div>
+                <p className={`text-[12px] font-bold ${isDarkMode ? 'text-[#3ec3ff]' : 'text-primary'}`}>{row.id}</p>
+                <h3 className={`text-[15px] font-bold ${isDarkMode ? 'text-white' : 'text-dark'}`}>{row.project}</h3>
+                <p className={`text-[12px] font-medium ${isDarkMode ? 'text-gray-400' : 'text-textSecondary'}`}>{row.client}</p>
+            </div>
+            <StatusBadge status={row.status} />
+        </div>
+        
+        <div className={`grid grid-cols-2 gap-4 py-3 border-t border-b ${isDarkMode ? 'border-white/5' : 'border-borderColor/50'}`}>
+            <div>
+                <p className="text-[10px] uppercase tracking-wider text-gray-500 mb-0.5">Project Cost</p>
+                <p className={`text-[13px] font-bold ${isDarkMode ? 'text-gray-200' : 'text-dark'}`}>{row.cost}</p>
+            </div>
+            <div>
+                <p className="text-[10px] uppercase tracking-wider text-gray-500 mb-0.5">Payment</p>
+                <PaymentBadge text={row.payment} isDarkMode={isDarkMode} />
+            </div>
+        </div>
+
+        <div className="flex justify-between items-center mt-3">
+            <AvatarStack isDarkMode={isDarkMode} />
+            <div className="flex gap-2">
+                <button className={`p-2 rounded-lg ${isDarkMode ? 'bg-white/5 text-gray-400' : 'bg-white text-gray-500 border border-borderColor'}`}><Eye size={16} /></button>
+                <button className={`p-2 rounded-lg ${isDarkMode ? 'bg-white/5 text-gray-400' : 'bg-white text-gray-500 border border-borderColor'}`}><Edit2 size={16} /></button>
+                <button className={`p-2 rounded-lg ${isDarkMode ? 'bg-white/5 text-red-400' : 'bg-white text-red-500 border border-borderColor'}`}><Trash2 size={16} /></button>
+            </div>
+        </div>
+    </div>
+);
+
 export default function ProjectSummaryTable() {
     const { isDarkMode } = useTheme();
     const navigate = useNavigate();
@@ -49,8 +85,8 @@ export default function ProjectSummaryTable() {
                 </button>
             </div>
 
-            {/* Table wrapper */}
-            <div className="overflow-x-auto w-full p-2 sm:p-6 relative z-10">
+            {/* Desktop Table View */}
+            <div className="hidden md:block overflow-x-auto w-full p-6 relative z-10">
                 <table className="w-full text-left border-collapse min-w-[1000px]">
                     <thead>
                         <tr className={`border-b ${isDarkMode ? 'border-white/5' : 'border-borderColor'}`}>
@@ -94,6 +130,13 @@ export default function ProjectSummaryTable() {
                         ))}
                     </tbody>
                 </table>
+            </div>
+
+            {/* Mobile Card View */}
+            <div className="md:hidden p-4 relative z-10">
+                {mockTableData.map((row, index) => (
+                    <MobileCardView key={index} row={row} isDarkMode={isDarkMode} navigate={navigate} />
+                ))}
             </div>
 
         </motion.div>

@@ -2,6 +2,7 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import DashboardLayout from "@/layouts/DashboardLayout";
 import WelcomeSection from "@/components/dashboard/core/WelcomeSection";
 import QuickStats from "@/components/dashboard/core/QuickStats";
+import QuickActions from "@/components/dashboard/core/QuickActions";
 import AnalyticsRowOne from "@/components/dashboard/analytics/AnalyticsRowOne";
 import ProjectSummaryTable from "@/components/dashboard/tables/ProjectSummaryTable";
 
@@ -145,6 +146,9 @@ export default function Dashboard({ handleLogout }) {
                         <div className="animate-fade-in p-4 md:p-6 lg:p-8 flex flex-col font-body min-h-[calc(100vh-80px)]">
                             <WelcomeSection />
                             <QuickStats />
+                            <div className="lg:hidden">
+                                <QuickActions />
+                            </div>
                             <AnalyticsRowOne />
 
                             <ProjectSummaryTable />

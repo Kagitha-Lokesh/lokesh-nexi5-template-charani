@@ -20,13 +20,17 @@ export default function AuthLayout({ children }) {
         ? 'bg-white/5 border-white/10'
         : 'bg-white/80 border-gray-200'
         }`}>
-        <div className="max-w-[1240px] mx-auto px-6 h-20 flex items-center justify-between">
+        <div className="max-w-[1240px] mx-auto px-6 h-[56px] md:h-20 flex items-center justify-between">
           <Link
             to="/"
             className="flex-shrink-0"
           >
-            <div className="flex items-center justify-center h-[110px] bg-gray-900 dark:bg-transparent rounded-lg px-2 transition-all group shadow-sm hover:shadow-md max-w-[160px]">
+            {/* Logo image only on desktop, text on mobile */}
+            <div className="hidden md:flex items-center justify-center h-[110px] bg-gray-900 dark:bg-transparent rounded-lg px-2 transition-all group shadow-sm hover:shadow-md max-w-[160px]">
               <img src={logo} alt="Logo" className="h-full object-contain transform group-hover:scale-105 transition-all" />
+            </div>
+            <div className="md:hidden">
+                <span className={`text-xl font-headings font-bold tracking-tighter ${isDarkMode ? 'text-white' : 'text-primary'}`}>NEXI5</span>
             </div>
           </Link>
 
@@ -56,21 +60,19 @@ export default function AuthLayout({ children }) {
         </div>
       </nav>
 
-      {/* Login / Register card */}
-      <div className="absolute top-1/2 left-[25%] -translate-x-1/2 -translate-y-1/2 z-30 mt-10">
+      {/* Login / Register card container - Center perfectly on mobile, left-aligned absolute on desktop */}
+      <div className="absolute inset-0 z-30 flex items-center justify-center md:left-[25%] md:-translate-x-1/2 md:top-1/2 md:-translate-y-1/2 md:w-auto p-4 md:p-0">
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
-          className="w-[440px] relative"
-          style={{ paddingBottom: '48px' }}
+          className="w-full max-w-[440px] relative mt-16 md:mt-0"
         >
-
           {children}
         </motion.div>
       </div>
 
-      {/* background glowing logo */}
-      <div className=" w-[100%] h-[100%] overflow-hidden top-[55%] left-[70%] z-20 ">
+      {/* background glowing logo - Hidden on mobile */}
+      <div className="hidden md:block w-[100%] h-[100%] overflow-hidden top-[55%] left-[70%] z-20 ">
         <img
           src={logo}
           className="w-[1200px] ml-[27%] logo-glow pointer-events-none"

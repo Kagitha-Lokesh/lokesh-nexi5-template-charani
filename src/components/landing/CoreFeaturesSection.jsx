@@ -38,14 +38,14 @@ export default function CoreFeaturesSection() {
                     initial="hidden"
                     whileInView="visible"
                     viewport={{ once: true }}
-                    className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8"
+                    className="flex overflow-x-auto pb-8 md:pb-0 md:grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 snap-x snap-mandatory hide-scrollbar"
                 >
                     {coreFeatures.map((feature, idx) => (
                         <motion.div
                             key={idx}
                             variants={fadeUp}
                             whileHover={{ y: -8, transition: { duration: 0.3 } }}
-                            className="group relative bg-white dark:bg-white/5 dark:backdrop-blur-md p-8 rounded-2xl border border-gray-100 dark:border-white/10 hover:shadow-2xl hover:shadow-primary/10 hover:border-primary/30 dark:hover:border-[#3ec3ff]/30 transition-all duration-300"
+                            className="min-w-[280px] md:min-w-0 flex-1 snap-center group relative bg-white dark:bg-white/5 dark:backdrop-blur-md p-8 rounded-2xl border border-gray-100 dark:border-white/10 hover:shadow-2xl hover:shadow-primary/10 hover:border-primary/30 dark:hover:border-[#3ec3ff]/30 transition-all duration-300"
                         >
                             <div className="w-12 h-12 rounded-xl bg-lightSky dark:bg-white/10 text-primary dark:text-[#3ec3ff] flex items-center justify-center mb-6 group-hover:scale-110 group-hover:rotate-3 group-hover:bg-primary dark:group-hover:bg-[#3ec3ff] group-hover:text-white transition-all duration-300">
                                 {feature.icon}
@@ -59,6 +59,17 @@ export default function CoreFeaturesSection() {
                         </motion.div>
                     ))}
                 </motion.div>
+
+                <style dangerouslySetInnerHTML={{
+                    __html: `
+            .hide-scrollbar::-webkit-scrollbar {
+              display: none;
+            }
+            .hide-scrollbar {
+              -ms-overflow-style: none;
+              scrollbar-width: none;
+            }
+          `}} />
 
             </div>
         </motion.section>

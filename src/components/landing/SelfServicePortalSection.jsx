@@ -18,8 +18,8 @@ export default function SelfServicePortalSection() {
         >
             <div className="max-w-[1200px] mx-auto px-6 flex flex-col-reverse lg:flex-row items-center gap-16">
 
-                {/* Left Side: Mockup */}
-                <div className="w-full lg:w-1/2 relative perspective-1000">
+                {/* Left Side: Mockup - Hidden on mobile */}
+                <div className="hidden lg:block w-full lg:w-1/2 relative perspective-1000">
 
                     {/* Decorative Backdrops */}
                     <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-primary/5 dark:bg-[#3ec3ff]/10 rounded-full blur-[80px] -z-10 transition-colors" />
@@ -53,10 +53,9 @@ export default function SelfServicePortalSection() {
 
                         {/* Action Grid */}
                         <div className="p-6">
-                            <div className="grid grid-cols-2 gap-4 mb-6">
+                            <div className="flex overflow-x-auto pb-4 lg:pb-0 lg:grid lg:grid-cols-2 gap-4 mb-6 snap-x snap-mandatory hide-scrollbar">
                                 {portalActions.map((action, i) => (
-
-                                    <div key={i} className={`p-4 rounded-xl border border-gray-100 dark:border-white/10 flex flex-col items-center justify-center gap-3 hover:bg-gray-50 dark:hover:bg-white/5 cursor-pointer transition-colors`}>
+                                    <div key={i} className={`min-w-[140px] flex-shrink-0 snap-center p-4 rounded-xl border border-gray-100 dark:border-white/10 flex flex-col items-center justify-center gap-3 hover:bg-gray-50 dark:hover:bg-white/5 cursor-pointer transition-colors`}>
                                         <div className={`w-10 h-10 rounded-full ${action.color} ${action.text} flex items-center justify-center transition-colors`}>
                                             <div className="w-5 h-5 rounded border border-current opacity-70 transition-colors" />
                                         </div>

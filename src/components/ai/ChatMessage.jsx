@@ -10,13 +10,13 @@ export default function ChatMessage({ message, isUser, timestamp }) {
             className={`flex flex-col ${isUser ? 'items-end' : 'items-start'} mb-4`}
         >
             <div
-                className={`max-w-[80%] p-3 rounded-2xl text-sm ${
+                className={`max-w-[85%] p-3.5 rounded-2xl text-[13px] leading-relaxed relative ${
                     isUser
-                        ? 'bg-sky-400 text-white rounded-tr-none shadow-md'
+                        ? 'bg-[#dcf8c6] dark:bg-[#054d44] text-dark dark:text-gray-100 rounded-tr-none shadow-sm'
                         : isDarkMode
-                            ? 'bg-white/10 text-gray-100 rounded-tl-none border border-white/5'
-                            : 'bg-gray-100 text-textPrimary rounded-tl-none border border-transparent shadow-sm'
-                } transition-all duration-200 hover:shadow-lg`}
+                            ? 'bg-[#1f2c33] text-gray-100 rounded-tl-none border border-white/5 shadow-sm'
+                            : 'bg-white text-textPrimary rounded-tl-none border border-gray-100 shadow-sm'
+                }`}
             >
                 {message}
             </div>

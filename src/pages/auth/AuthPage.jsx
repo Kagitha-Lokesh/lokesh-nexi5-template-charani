@@ -90,7 +90,7 @@ export default function AuthPage({ onLoginSuccess, initialRegister = false }) {
             : 'bg-gray-50 border-gray-200 text-gray-900 focus:border-primary/50'
     }`;
 
-    const cardBase = `form-container w-full rounded-2xl border shadow-2xl backdrop-blur-xl p-8 flex flex-col gap-4 ${
+    const cardBase = `form-container w-full rounded-2xl border shadow-2xl backdrop-blur-xl p-5 md:p-8 flex flex-col gap-4 ${
         isDarkMode
             ? 'bg-[#0c162d]/60 border-white/10 text-white'
             : 'bg-white/95 border-gray-200 text-gray-900'

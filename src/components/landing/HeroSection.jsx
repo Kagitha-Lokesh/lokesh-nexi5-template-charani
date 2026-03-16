@@ -112,12 +112,12 @@ export default function HeroSection({ onGetStarted }) {
                     </motion.div>
                 </motion.div>
 
-                {/* Right Content - Dashboard Mockup */}
+                {/* Right Content - Dashboard Mockup - Hidden on mobile as per user request */}
                 <motion.div
                     initial={{ opacity: 0, x: 30 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.8, delay: 0.2 }}
-                    className="w-full lg:w-1/2 relative perspective-1000"
+                    className="hidden lg:block w-full lg:w-1/2 relative perspective-1000"
                 >
                     {/* Main Dashboard UI Mockup */}
                     <div className="relative rounded-2xl border border-gray-200/50 dark:border-white/10 bg-white/50 dark:bg-[#0c162d]/50 backdrop-blur shadow-2xl overflow-hidden transform hover:scale-[1.02] transition-transform duration-500 will-change-transform">
