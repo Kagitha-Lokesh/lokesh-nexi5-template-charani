@@ -169,16 +169,16 @@ export default function HRChat() {
                                 </div>
 
                                 {/* Input */}
-                                <form onSubmit={sendMessage} className={`p-4 border-t flex items-center gap-3 ${isDarkMode ? 'border-white/10' : 'border-borderColor'}`}>
-                                    <button type="button" className={`p-2 rounded-lg ${isDarkMode ? 'hover:bg-white/10 text-gray-400' : 'hover:bg-gray-100 text-gray-500'}`}><Paperclip size={16} /></button>
+                                <form onSubmit={sendMessage} className={`p-2 md:p-4 border-t flex items-center gap-2 md:gap-3 ${isDarkMode ? 'border-white/10' : 'border-borderColor'}`}>
+                                    <button type="button" className={`p-2 rounded-lg shrink-0 ${isDarkMode ? 'hover:bg-white/10 text-gray-400' : 'hover:bg-gray-100 text-gray-500'}`}><Paperclip size={16} /></button>
                                     <input
-                                        className={`flex-1 px-4 py-2.5 rounded-xl border outline-none text-sm transition-all ${isDarkMode ? 'bg-white/5 border-white/10 text-white placeholder-gray-500 focus:border-[#3ec3ff]' : 'bg-gray-50 border-gray-200 text-dark placeholder-gray-400 focus:border-primary'}`}
+                                        className={`flex-1 min-w-0 px-3 md:px-4 py-2 md:py-2.5 rounded-xl border outline-none text-sm transition-all ${isDarkMode ? 'bg-white/5 border-white/10 text-white placeholder-gray-500 focus:border-[#3ec3ff]' : 'bg-gray-50 border-gray-200 text-dark placeholder-gray-400 focus:border-primary'}`}
                                         placeholder="Type a message..."
                                         value={input}
                                         onChange={e => setInput(e.target.value)}
                                     />
-                                    <button type="button" className={`p-2 rounded-lg ${isDarkMode ? 'hover:bg-white/10 text-gray-400' : 'hover:bg-gray-100 text-gray-500'}`}><Smile size={16} /></button>
-                                    <button type="submit" disabled={!input.trim()} className={`p-2.5 rounded-xl transition-all active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed ${isDarkMode ? 'bg-[#3ec3ff] text-[#0c162d] hover:bg-[#3ec3ff]/90' : 'bg-primary text-white hover:bg-blue-700'}`}>
+                                    <button type="button" className={`p-2 rounded-lg shrink-0 ${isDarkMode ? 'hover:bg-white/10 text-gray-400' : 'hover:bg-gray-100 text-gray-500'}`}><Smile size={16} /></button>
+                                    <button type="submit" disabled={!input.trim()} className={`p-2 md:p-2.5 rounded-xl shrink-0 transition-all active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed ${isDarkMode ? 'bg-[#3ec3ff] text-[#0c162d] hover:bg-[#3ec3ff]/90' : 'bg-primary text-white hover:bg-blue-700'}`}>
                                         <Send size={16} />
                                     </button>
                                 </form>
