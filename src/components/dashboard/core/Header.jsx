@@ -3,7 +3,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { useTheme } from '@/context/ThemeContext';
 import {
     Bell, Search, Settings, User, LogOut, MessageSquare,
-    Menu, ChevronDown, Moon, Sun, X, CheckCheck, Clock
+    Menu, ChevronDown, Moon, Sun, X, CheckCheck, Clock, Bot
 } from 'lucide-react';
 import { ROLE_LABELS } from '@/config/roles';
 import { sidebarConfig, globalMenuItems } from '@/config/sidebarConfig';
@@ -85,15 +85,7 @@ export default function Header({ sidebarOpen, setSidebarOpen, handleLogout }) {
             {/* ── Right side ────────────────────────────────────────────── */}
             <div className="flex items-center gap-3 sm:gap-5">
                 <div className="hidden sm:flex items-center gap-4 mr-2">
-                    <button className="flex items-center gap-1 text-sm text-textSecondary dark:text-gray-400 hover:text-primary dark:hover:text-[#3ec3ff] font-medium transition-colors">
-                        {lang} <ChevronDown size={14} />
-                    </button>
-                    <button className="flex items-center gap-1 text-sm text-textSecondary dark:text-gray-400 hover:text-primary dark:hover:text-[#3ec3ff] font-medium transition-colors">
-                        Reports <ChevronDown size={14} />
-                    </button>
-                    <button className="flex items-center gap-1 text-sm text-textSecondary dark:text-gray-400 hover:text-primary dark:hover:text-[#3ec3ff] font-medium transition-colors">
-                        Project <ChevronDown size={14} />
-                    </button>
+                    {/* Language, Reports, and Project dropdowns removed as per request */}
                 </div>
 
                 {/* Icons */}
@@ -107,8 +99,21 @@ export default function Header({ sidebarOpen, setSidebarOpen, handleLogout }) {
                         {isDarkMode ? <Sun size={20} /> : <Moon size={20} />}
                     </button>
 
+                    {/* AI Assistant icon */}
+                    <button 
+                        onClick={() => navigate('/dashboard/ai-assistant')}
+                        className="p-2 relative text-textSecondary dark:text-gray-400 hover:text-primary dark:hover:text-[#3ec3ff] hover:bg-lightSky dark:hover:bg-white/10 rounded-full transition-all"
+                        title="AI Assistant"
+                    >
+                        <Bot size={20} />
+                    </button>
+
                     {/* Messages icon */}
-                    <button className="p-2 relative text-textSecondary dark:text-gray-400 hover:text-primary dark:hover:text-[#3ec3ff] hover:bg-lightSky dark:hover:bg-white/10 rounded-full transition-all">
+                    <button 
+                        onClick={() => navigate('/dashboard/hr-chat')}
+                        className="p-2 relative text-textSecondary dark:text-gray-400 hover:text-primary dark:hover:text-[#3ec3ff] hover:bg-lightSky dark:hover:bg-white/10 rounded-full transition-all"
+                        title="Messages"
+                    >
                         <MessageSquare size={20} />
                         <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-red-500 rounded-full border-2 border-white dark:border-[#0c162d]" />
                     </button>

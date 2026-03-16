@@ -15,6 +15,8 @@ export default {
         secondary: '#2563EB',
         lightSky: '#E0F2FE',
         dark: '#0F172A',
+        darkPrimary: '#0F172A',
+        darkSecondary: '#1E293B',
         lightBlueBg: '#F1F5F9',
         accent: '#06B6D4',
         borderColor: '#E2E8F0',

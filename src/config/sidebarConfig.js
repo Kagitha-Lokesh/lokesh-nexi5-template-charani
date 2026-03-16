@@ -5,7 +5,7 @@ import {
     UserPlus, CheckCircle, FileCheck, ShieldAlert, HeartHandshake, UserPlus2,
     BarChart3, Settings, Bell, LogOut, FileBarChart, PieChart, Landmark,
     TrendingUp, FileSignature, Receipt, Calculator, Banknote, ShieldCheck,
-    Package, MessageSquare, FileQuestion
+    Package, MessageSquare, FileQuestion, Bot
 } from 'lucide-react';
 
 export const sidebarConfig = {
@@ -41,6 +41,7 @@ export const sidebarConfig = {
       items: [
         { label: "Payroll Overview", path: "/dashboard/payroll", icon: CreditCard },
         { label: "Reports & Analytics", path: "/dashboard/reports", icon: BarChart3 },
+        { label: "AI Assistant", path: "/dashboard/ai-assistant", icon: Bot },
       ]
     },
     {
@@ -94,7 +95,8 @@ export const sidebarConfig = {
       category: "Reports & Communication",
       items: [
         { label: "Reports & Analytics", path: "/dashboard/reports", icon: BarChart3 },
-        { label: "HR Chat / Notifications", path: "/dashboard/hr-head/hr-chat", icon: Bell }
+        { label: "HR Chat / Notifications", path: "/dashboard/hr-head/hr-chat", icon: Bell },
+        { label: "AI Assistant", path: "/dashboard/ai-assistant", icon: Bot }
       ]
     }
   ],
@@ -126,7 +128,8 @@ export const sidebarConfig = {
       items: [
         { label: "Reports", path: "/dashboard/hr-executive/reports", icon: BarChart3 },
         { label: "Notifications", path: "/dashboard/notifications", icon: Bell },
-        { label: "HR Chat", path: "/dashboard/hr-chat", icon: MessageSquare }
+        { label: "HR Chat", path: "/dashboard/hr-chat", icon: MessageSquare },
+        { label: "AI Assistant", path: "/dashboard/ai-assistant", icon: Bot }
       ]
     }
   ],
@@ -171,7 +174,8 @@ export const sidebarConfig = {
       items: [
         { label: "Payroll Reports", path: "/dashboard/hr-accountant/payroll-reports", icon: PieChart },
         { label: "Financial Reports", path: "/dashboard/hr-accountant/financial-reports", icon: Calculator },
-        { label: "Notifications", path: "/dashboard/notifications", icon: Bell }
+        { label: "Notifications", path: "/dashboard/notifications", icon: Bell },
+        { label: "AI Assistant", path: "/dashboard/ai-assistant", icon: Bot }
       ]
     }
   ],
@@ -197,7 +201,8 @@ export const sidebarConfig = {
       category: "Revenue & Analytics",
       items: [
         { label: "Revenue Tracking", path: "/dashboard/bde/revenue-tracking", icon: BarChart3 },
-        { label: "Notifications", path: "/dashboard/notifications", icon: Bell }
+        { label: "Notifications", path: "/dashboard/notifications", icon: Bell },
+        { label: "AI Assistant", path: "/dashboard/ai-assistant", icon: Bot }
       ]
     }
   ],
@@ -227,7 +232,8 @@ export const sidebarConfig = {
     {
       category: "Communication",
       items: [
-        { label: "Notifications", path: "/dashboard/notifications", icon: Bell }
+        { label: "Notifications", path: "/dashboard/notifications", icon: Bell },
+        { label: "AI Assistant", path: "/dashboard/ai-assistant", icon: Bot }
       ]
     }
   ],
@@ -256,7 +262,8 @@ export const sidebarConfig = {
     {
       category: "Communication",
       items: [
-        { label: "Notifications", path: "/dashboard/notifications", icon: Bell }
+        { label: "Notifications", path: "/dashboard/notifications", icon: Bell },
+        { label: "AI Assistant", path: "/dashboard/ai-assistant", icon: Bot }
       ]
     }
   ]

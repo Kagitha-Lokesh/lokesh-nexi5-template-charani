@@ -78,6 +78,7 @@ import PerformanceReviewsDashboard from "@/pages/dashboard/manager/PerformanceRe
 import HrExecutiveDashboard from "@/pages/dashboard/hr-executive/HrExecutiveDashboard";
 import AssetManagementDashboard from "@/pages/dashboard/hr-executive/AssetManagementDashboard";
 import HRExecutiveReportsDashboard from "@/pages/dashboard/hr-executive/HRExecutiveReportsDashboard";
+import AIAssistant from "@/pages/dashboard/AIAssistant";
 
 
 
@@ -135,6 +136,7 @@ export default function Dashboard({ handleLogout }) {
                 <Route path="hr-executive/assets" element={<AssetManagementDashboard />} />
                 <Route path="hr-executive/reports" element={<HRExecutiveReportsDashboard />} />
                 <Route path="hr-chat" element={<HRHeadHRChat />} />
+                <Route path="ai-assistant" element={<AIAssistant />} />
 
                 {/* Default Dashboard Overview Route */}
                 <Route
