@@ -16,11 +16,10 @@ export default function Footer() {
         >
             <div className="max-w-[1200px] mx-auto px-6">
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
-
+                <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
                     {/* Column 1 */}
-                    <div className="flex flex-col gap-6">
-                        <div className="flex items-center gap-2 cursor-pointer">
+                    <div className="flex flex-col items-center md:items-start text-center md:text-left gap-6">
+                        <div className="flex items-center gap-2 cursor-pointer transition-transform hover:scale-105">
                             <img src={logo} alt="Logo" className="h-10 rounded-lg" />
                             <span className="font-headings font-bold text-xl tracking-tight">NEXI5 HRM</span>
                         </div>
@@ -35,7 +34,7 @@ export default function Footer() {
                     </div>
 
                     {/* Column 2 */}
-                    <div>
+                    <div className="text-center md:text-left">
                         <h4 className="font-bold text-lg mb-6 tracking-wide">Product</h4>
                         <ul className="space-y-4 text-sm text-gray-400 dark:text-gray-300 transition-colors">
                             <li><a href="#" className="hover:text-primary dark:hover:text-white transition-colors">Features</a></li>
@@ -46,7 +45,7 @@ export default function Footer() {
                     </div>
 
                     {/* Column 3 */}
-                    <div>
+                    <div className="text-center md:text-left">
                         <h4 className="font-bold text-lg mb-6 tracking-wide">Company</h4>
                         <ul className="space-y-4 text-sm text-gray-400 dark:text-gray-300 transition-colors">
                             <li><a href="#" className="hover:text-primary dark:hover:text-white transition-colors">About</a></li>
@@ -57,7 +56,7 @@ export default function Footer() {
                     </div>
 
                     {/* Column 4 */}
-                    <div>
+                    <div className="text-center md:text-left">
                         <h4 className="font-bold text-lg mb-6 tracking-wide">Resources</h4>
                         <ul className="space-y-4 text-sm text-gray-400 dark:text-gray-300 transition-colors">
                             <li><a href="#" className="hover:text-primary dark:hover:text-white transition-colors">Documentation</a></li>
@@ -66,11 +65,23 @@ export default function Footer() {
                             <li><a href="#" className="hover:text-primary dark:hover:text-white transition-colors">Community</a></li>
                         </ul>
                     </div>
-
                 </div>
 
-                {/* Bottom Bar */}
-                <div className="pt-8 border-t border-gray-800 dark:border-white/10 flex flex-col items-center justify-center gap-4 text-sm text-gray-500 dark:text-gray-400 transition-colors">
+                {/* Mobile Compact Footer Row */}
+                <div className="flex md:hidden items-center justify-between py-6 border-t border-gray-800 dark:border-white/10">
+                    <div className="flex items-center gap-2">
+                        <img src={logo} alt="Logo" className="h-6 rounded" />
+                        <span className="font-bold text-xs tracking-tight">NEXI5 HRM</span>
+                    </div>
+                    <div className="flex gap-4 text-[10px] text-gray-400">
+                        <a href="#" className="hover:text-white">Privacy</a>
+                        <a href="#" className="hover:text-white">Terms</a>
+                        <a href="#" className="hover:text-white">Contact</a>
+                    </div>
+                </div>
+
+                {/* Bottom Bar (Desktop/Tablet Only) */}
+                <div className="hidden md:flex pt-8 border-t border-gray-800 dark:border-white/10 flex-col items-center justify-center gap-4 text-sm text-gray-500 dark:text-gray-400 transition-colors">
                     <p className="text-center">&copy; {new Date().getFullYear()} NEXI5 HRM Portal. All rights reserved.</p>
                     <div className="flex gap-6">
                         <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>

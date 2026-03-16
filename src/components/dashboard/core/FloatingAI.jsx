@@ -1,15 +1,25 @@
 import { motion, AnimatePresence } from 'framer-motion';
-import { MessageSquare, X, Send, Paperclip, Mic } from 'lucide-react';
+import { MessageSquare, X } from 'lucide-react';
 import { useState } from 'react';
 import { useTheme } from '@/context/ThemeContext';
+import { useNavigate } from 'react-router-dom';
 import AIChatbot from '@/components/ai/AIChatbot';
 
 export default function FloatingAI() {
     const [isOpen, setIsOpen] = useState(false);
     const { isDarkMode } = useTheme();
+    const navigate = useNavigate();
+
+    const handleToggle = () => {
+        if (window.innerWidth < 1024) {
+            navigate('/dashboard/ai-assistant');
+        } else {
+            setIsOpen(!isOpen);
+        }
+    };
 
     return (
-        <div className="fixed bottom-[156px] right-6 z-[60] lg:hidden">
+        <div className="fixed bottom-[88px] right-[88px] z-[60] lg:hidden">
             <AnimatePresence>
                 {isOpen && (
                     <motion.div
@@ -26,7 +36,7 @@ export default function FloatingAI() {
             <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                onClick={() => setIsOpen(!isOpen)}
+                onClick={handleToggle}
                 className={`w-14 h-14 rounded-full flex items-center justify-center text-white shadow-2xl transition-all relative ${
                     isOpen ? 'bg-red-500' : 'bg-blue-600'
                 }`}

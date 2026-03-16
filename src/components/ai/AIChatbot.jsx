@@ -52,12 +52,12 @@ export default function AIChatbot({ isFloating = false, onClose }) {
     };
 
     return (
-        <div className={`rounded-xl shadow-2xl overflow-hidden flex flex-col md:flex-row border transition-all duration-300 ${
-            isFloating ? 'h-full w-full' : 'h-[600px]'
+        <div className={`shadow-2xl overflow-hidden flex flex-col md:flex-row transition-all duration-300 ${
+            isFloating ? 'h-full w-full' : 'h-[600px] md:rounded-xl'
         } ${
             isDarkMode 
-            ? 'bg-[#0f172a]/95 backdrop-blur-2xl border-white/10 text-white' 
-            : 'bg-white border-gray-200 text-textPrimary'
+            ? 'bg-[#0f172a]/95 backdrop-blur-2xl text-white' 
+            : 'bg-white text-textPrimary'
         }`}>
             {/* Left Side: Conversation Area */}
             <div className={`flex-1 flex flex-col min-w-0 border-r ${isDarkMode ? 'border-white/10' : 'border-gray-100'}`}>

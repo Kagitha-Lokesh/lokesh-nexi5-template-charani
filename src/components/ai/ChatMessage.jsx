@@ -14,8 +14,8 @@ export default function ChatMessage({ message, isUser, timestamp }) {
                     isUser
                         ? 'bg-[#dcf8c6] dark:bg-[#054d44] text-dark dark:text-gray-100 rounded-tr-none shadow-sm'
                         : isDarkMode
-                            ? 'bg-[#1f2c33] text-gray-100 rounded-tl-none border border-white/5 shadow-sm'
-                            : 'bg-white text-textPrimary rounded-tl-none border border-gray-100 shadow-sm'
+                            ? 'bg-[#1f2c33] text-gray-100 rounded-tl-none border-none shadow-sm'
+                            : 'bg-white text-textPrimary rounded-tl-none border-none shadow-sm'
                 }`}
             >
                 {message}

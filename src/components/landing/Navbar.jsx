@@ -69,40 +69,20 @@ export default function Navbar({ onLoginClick, onRegisterClick, isDarkMode, togg
                     </button>
                 </div>
 
-                {/* Mobile Toggle */}
-                <div className="lg:hidden flex items-center gap-4">
+                {/* Direct buttons for Mobile */}
+                <div className="flex lg:hidden items-center gap-2">
+                    <button onClick={onLoginClick} className="text-primary dark:text-[#3ec3ff] font-bold text-xs py-1.5 px-3 border border-primary dark:border-[#3ec3ff] rounded-full">Login</button>
+                    <button onClick={onRegisterClick} className="bg-primary text-white font-bold text-xs py-1.5 px-3 rounded-full shadow-md">Sign Up</button>
                     <button
                         onClick={toggleTheme}
-                        className="p-2 text-gray-500 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-white/10 rounded-full transition-colors"
+                        className="p-1.5 text-gray-500 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-white/10 rounded-full transition-colors"
                         aria-label="Toggle Theme"
                     >
-                        {isDarkMode ? <Sun size={20} /> : <Moon size={20} />}
-                    </button>
-                    <button
-                        className="text-gray-600 dark:text-gray-300 p-2 hover:bg-gray-100 dark:hover:bg-white/10 rounded-lg transition-colors"
-                        onClick={() => setIsOpen(!isOpen)}
-                    >
-                        {isOpen ? <X size={24} /> : <Menu size={24} />}
+                        {isDarkMode ? <Sun size={18} /> : <Moon size={18} />}
                     </button>
                 </div>
             </div>
 
-            {/* Mobile Menu */}
-            {isOpen && (
-                <div className="lg:hidden bg-white/95 dark:bg-[#0c162d]/95 backdrop-blur-xl border-b border-gray-100 dark:border-white/10 absolute w-full left-0 top-[64px] md:top-20 shadow-2xl transition-all duration-300">
-                    <div className="flex flex-col p-6 gap-2">
-                        <button onClick={() => scrollTo('features')} className="text-left text-gray-600 dark:text-gray-300 font-medium py-3 hover:text-primary dark:hover:text-[#3ec3ff] transition-colors">Features</button>
-                        <button onClick={() => scrollTo('solutions')} className="text-left text-gray-600 dark:text-gray-300 font-medium py-3 hover:text-primary dark:hover:text-[#3ec3ff] transition-colors">Solutions</button>
-                        <button onClick={() => scrollTo('technology')} className="text-left text-gray-600 dark:text-gray-300 font-medium py-3 hover:text-primary dark:hover:text-[#3ec3ff] transition-colors">Technology</button>
-                        <button onClick={() => scrollTo('analytics')} className="text-left text-gray-600 dark:text-gray-300 font-medium py-3 hover:text-primary dark:hover:text-[#3ec3ff] transition-colors">Analytics</button>
-                        <button onClick={() => scrollTo('contact')} className="text-left text-gray-600 dark:text-gray-300 font-medium py-3 hover:text-primary dark:hover:text-[#3ec3ff] transition-colors">Contact</button>
-                        <div className="flex flex-col gap-3 mt-4">
-                            <button onClick={onLoginClick} className="w-full text-center text-primary dark:text-[#3ec3ff] font-bold py-3 border-2 border-primary dark:border-[#3ec3ff] rounded-full hover:bg-primary hover:text-white dark:hover:bg-[#3ec3ff] dark:hover:text-dark transition-all">Login</button>
-                            <button onClick={onRegisterClick} className="w-full text-center bg-primary text-white py-3 rounded-full font-bold shadow-lg hover:bg-secondary transition-all">Sign Up</button>
-                        </div>
-                    </div>
-                </div>
-            )}
         </nav>
     );
 }
