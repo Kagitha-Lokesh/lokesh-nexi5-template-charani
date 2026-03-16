@@ -93,7 +93,7 @@ export default function AnalyticsRowOne() {
                         </div>
                         <div className="p-2 rounded-lg bg-emerald-500/10 border border-emerald-500/20">
                             <span className="text-[10px] uppercase text-gray-500 block">Avg Check-in</span>
-                            <span className="text-sm font-bold text-emerald-500">09:15 AM</span>
+                            <span className="text-sm font-bold text-emerald-500">09:00 AM</span>
                         </div>
                     </div>
                     <ResponsiveContainer width="100%" height="100%">

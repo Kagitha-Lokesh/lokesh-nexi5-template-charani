@@ -34,7 +34,7 @@ export default function FloatingActions() {
                                 }}
                                 className="flex items-center gap-3 group"
                             >
-                                <span className={`px-3 py-1.5 rounded-lg text-xs font-bold shadow-lg ${isDarkMode ? 'bg-gray-800 text-white' : 'bg-white text-dark'} opacity-0 group-hover:opacity-100 lg:group-hover:opacity-100 transition-opacity whitespace-nowrap`}>
+                                <span className={`px-3 py-1.5 rounded-lg text-xs font-bold shadow-lg ${isDarkMode ? 'bg-slate-800/90 text-white' : 'bg-white text-dark'} opacity-0 group-hover:opacity-100 lg:group-hover:opacity-100 transition-opacity whitespace-nowrap`}>
                                     {action.label}
                                 </span>
                                 <div className={`w-12 h-12 rounded-full flex items-center justify-center text-white shadow-xl ${action.color} active:scale-90 transition-transform`}>

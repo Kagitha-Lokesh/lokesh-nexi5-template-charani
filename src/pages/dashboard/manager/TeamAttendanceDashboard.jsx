@@ -100,11 +100,11 @@ export default function TeamAttendanceDashboard() {
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
                         <div className="space-y-1.5">
                             <label className="text-xs font-semibold text-slate-500">Date</label>
-                            <input type="date" className={`w-full px-3 py-2 rounded-lg border text-sm outline-none transition-all ${isDarkMode ? 'bg-white/5 border-white/10 text-white focus:border-blue-500' : 'bg-slate-50 border-slate-200 text-slate-900 focus:border-blue-500'}`} defaultValue={new Date().toISOString().split('T')[0]} />
+                            <input type="date" className={`w-full px-3 py-2 rounded-lg border text-sm outline-none transition-all ${isDarkMode ? 'bg-white/5 border-white/10 text-white focus:border-blue-500' : 'bg-slate-50 border-slate-200 text-slate-900 focus:border-blue-500'}`} defaultValue={new Date().toLocaleDateString('en-CA')} />
                         </div>
                         <div className="space-y-1.5">
                             <label className="text-xs font-semibold text-slate-500">Department</label>
-                            <select className={`w-full px-3 py-2 rounded-lg border text-sm outline-none transition-all ${isDarkMode ? 'bg-white/5 border-white/10 text-white focus:border-blue-500' : 'bg-slate-50 border-slate-200 text-slate-900 focus:border-blue-500'}`}>
+                            <select className={`w-full px-3 py-2 rounded-lg border text-sm outline-none transition-all ${isDarkMode ? 'bg-slate-800 border-white/10 text-white focus:border-blue-500' : 'bg-slate-50 border-slate-200 text-slate-900 focus:border-blue-500'}`}>
                                 <option className={isDarkMode ? 'bg-[#0c162d]' : ''}>Engineering</option>
                                 <option className={isDarkMode ? 'bg-[#0c162d]' : ''}>HR</option>
                                 <option className={isDarkMode ? 'bg-[#0c162d]' : ''}>Marketing</option>
@@ -113,7 +113,7 @@ export default function TeamAttendanceDashboard() {
                         </div>
                         <div className="space-y-1.5">
                             <label className="text-xs font-semibold text-slate-500">Team</label>
-                            <select className={`w-full px-3 py-2 rounded-lg border text-sm outline-none transition-all ${isDarkMode ? 'bg-white/5 border-white/10 text-white focus:border-blue-500' : 'bg-slate-50 border-slate-200 text-slate-900 focus:border-blue-500'}`}>
+                            <select className={`w-full px-3 py-2 rounded-lg border text-sm outline-none transition-all ${isDarkMode ? 'bg-slate-800 border-white/10 text-white focus:border-blue-500' : 'bg-slate-50 border-slate-200 text-slate-900 focus:border-blue-500'}`}>
                                 <option className={isDarkMode ? 'bg-[#0c162d]' : ''}>All Teams</option>
                                 <option className={isDarkMode ? 'bg-[#0c162d]' : ''}>Frontend</option>
                                 <option className={isDarkMode ? 'bg-[#0c162d]' : ''}>Backend</option>
@@ -122,7 +122,7 @@ export default function TeamAttendanceDashboard() {
                         </div>
                         <div className="space-y-1.5">
                             <label className="text-xs font-semibold text-slate-500">Attendance Status</label>
-                            <select className={`w-full px-3 py-2 rounded-lg border text-sm outline-none transition-all ${isDarkMode ? 'bg-white/5 border-white/10 text-white focus:border-blue-500' : 'bg-slate-50 border-slate-200 text-slate-900 focus:border-blue-500'}`}>
+                            <select className={`w-full px-3 py-2 rounded-lg border text-sm outline-none transition-all ${isDarkMode ? 'bg-slate-800 border-white/10 text-white focus:border-blue-500' : 'bg-slate-50 border-slate-200 text-slate-900 focus:border-blue-500'}`}>
                                 <option className={isDarkMode ? 'bg-[#0c162d]' : ''}>Present</option>
                                 <option className={isDarkMode ? 'bg-[#0c162d]' : ''}>Absent</option>
                                 <option className={isDarkMode ? 'bg-[#0c162d]' : ''}>Late</option>

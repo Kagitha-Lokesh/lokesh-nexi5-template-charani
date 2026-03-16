@@ -83,12 +83,12 @@ export default function AttendanceDashboard() {
                 <div className={`p-4 rounded-[10px] border flex flex-col md:flex-row items-center justify-between gap-4 transition-all ${isDarkMode ? 'bg-[#0c162d]/50 backdrop-blur-md border-white/10 shadow-xl' : 'bg-white shadow-[0px_10px_25px_rgba(0,0,0,0.08)] border-borderColor'}`}>
                     <div className="flex flex-col sm:flex-row gap-3 w-full md:w-auto">
                         <input type="date" className={`rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-1 transition-all w-full sm:w-auto ${isDarkMode ? 'bg-white/5 border-white/10 text-white focus:border-[#3ec3ff] focus:ring-[#3ec3ff]' : 'border border-borderColor text-textSecondary focus:border-primary focus:ring-primary'}`} />
-                        <select className={`rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-1 transition-all w-full sm:w-auto ${isDarkMode ? 'bg-[#0c162d] border-white/10 text-white focus:border-[#3ec3ff] focus:ring-[#3ec3ff]' : 'border border-borderColor text-textSecondary focus:border-primary focus:ring-primary bg-white'}`}>
+                        <select className={`rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-1 transition-all w-full sm:w-auto ${isDarkMode ? 'bg-slate-800 border-white/10 text-white focus:border-[#3ec3ff] focus:ring-[#3ec3ff]' : 'border border-borderColor text-textSecondary focus:border-primary focus:ring-primary bg-white'}`}>
                             {attendanceDepartments.map(dept => (
                                 <option key={dept.value} value={dept.value}>{dept.label}</option>
                             ))}
                         </select>
-                        <select className={`rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-1 transition-all w-full sm:w-auto ${isDarkMode ? 'bg-[#0c162d] border-white/10 text-white focus:border-[#3ec3ff] focus:ring-[#3ec3ff]' : 'border border-borderColor text-textSecondary focus:border-primary focus:ring-primary bg-white'}`}>
+                        <select className={`rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-1 transition-all w-full sm:w-auto ${isDarkMode ? 'bg-slate-800 border-white/10 text-white focus:border-[#3ec3ff] focus:ring-[#3ec3ff]' : 'border border-borderColor text-textSecondary focus:border-primary focus:ring-primary bg-white'}`}>
                             {attendanceStatuses.map(status => (
                                 <option key={status.value} value={status.value}>{status.label}</option>
                             ))}

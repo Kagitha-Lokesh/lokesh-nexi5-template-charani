@@ -39,7 +39,9 @@ export default function Header({ sidebarOpen, setSidebarOpen, handleLogout }) {
             if (notifRef.current && !notifRef.current.contains(e.target)) setShowNotifPanel(false);
         };
         document.addEventListener('mousedown', handler);
-        return () => document.removeEventListener('mousedown', handler);
+        return () => {
+            document.removeEventListener('mousedown', handler);
+        };
     }, []);
 
     // ── Page title logic ─────────────────────────────────────────────────────
@@ -77,7 +79,7 @@ export default function Header({ sidebarOpen, setSidebarOpen, handleLogout }) {
                     </h1>
                 </div>
 
-                <div className="relative hidden md:flex items-center w-full max-w-md ml-4">
+                <div className="relative hidden md:flex items-center w-full max-w-sm ml-4">
                     <Search className={`absolute left-3 ${isDarkMode ? 'text-gray-400' : 'text-textSecondary'}`} size={18} />
                     <input
                         type="text"
@@ -138,7 +140,7 @@ export default function Header({ sidebarOpen, setSidebarOpen, handleLogout }) {
                         </button>
 
                         {showNotifPanel && (
-                            <div className={`absolute right-0 mt-2 w-96 max-w-[95vw] rounded-xl border shadow-2xl z-50 overflow-hidden ${isDarkMode ? 'bg-[#0c162d] border-white/10' : 'bg-white border-gray-200'}`}>
+                            <div className={`absolute right-0 mt-2 w-96 max-w-[95vw] rounded-xl border shadow-2xl z-50 overflow-hidden ${isDarkMode ? 'bg-[#1e293b]/95 backdrop-blur-xl border-white/10' : 'bg-white border-gray-200'}`}>
                                 {/* Header */}
                                 <div className={`flex items-center justify-between px-4 py-3 border-b ${isDarkMode ? 'border-white/10' : 'border-gray-100'}`}>
                                     <div className="flex items-center gap-2">
@@ -217,7 +219,7 @@ export default function Header({ sidebarOpen, setSidebarOpen, handleLogout }) {
 
                     {/* Profile Dropdown Menu */}
                     {showProfileMenu && (
-                        <div className={`absolute right-0 mt-2 w-56 rounded-xl shadow-xl py-2 border z-50 overflow-hidden ${isDarkMode ? 'bg-[#0c162d] border-white/10 text-white' : 'bg-white border-gray-100'}`}>
+                        <div className={`absolute right-0 mt-2 w-56 rounded-xl shadow-xl py-2 border z-50 overflow-hidden ${isDarkMode ? 'bg-[#1e293b]/95 backdrop-blur-xl border-white/10 text-white' : 'bg-white border-gray-100'}`}>
                             {/* User info header */}
                             <div className={`px-4 py-3 border-b ${isDarkMode ? 'border-white/10' : 'border-gray-100'}`}>
                                 <p className={`text-sm font-bold ${isDarkMode ? 'text-white' : 'text-dark'}`}>{userData.name}</p>

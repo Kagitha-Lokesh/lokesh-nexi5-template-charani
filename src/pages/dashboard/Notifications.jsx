@@ -52,7 +52,7 @@ export default function Notifications() {
                     ].map((filter, i) => (
                         <div key={i} className="flex flex-col gap-1.5">
                             <label className={`text-[10px] font-bold uppercase tracking-wider ${isDarkMode ? 'text-gray-500' : 'text-textSecondary'}`}>{filter.label}</label>
-                            <select className={`w-full p-2.5 rounded-lg border text-xs transition-all outline-none ${isDarkMode ? 'bg-[#0c162d] border-white/10 text-gray-300 focus:border-[#3ec3ff]' : 'bg-gray-50 border-borderColor text-dark focus:border-primary'}`}>
+                            <select className={`w-full p-2.5 rounded-lg border text-xs transition-all outline-none ${isDarkMode ? 'bg-slate-800 border-white/10 text-gray-300 focus:border-[#3ec3ff]' : 'bg-gray-50 border-borderColor text-dark focus:border-primary'}`}>
                                 <option>{filter.placeholder}</option>
                             </select>
                         </div>

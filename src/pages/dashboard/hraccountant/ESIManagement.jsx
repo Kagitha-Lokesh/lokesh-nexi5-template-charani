@@ -52,7 +52,7 @@ const SelectField = ({ label, opts, val, onChange, isDarkMode }) => (
                 onChange={e => onChange(e.target.value)} 
                 className={`w-full appearance-none pl-3 pr-8 py-2.5 rounded-xl text-sm border transition-all focus:outline-none focus:ring-2 ${
                     isDarkMode 
-                        ? 'bg-white/5 border-white/10 text-white focus:ring-blue-500/20 focus:border-blue-500/50' 
+                        ? 'bg-slate-800/90 border-white/10 text-white focus:ring-blue-500/20 focus:border-blue-500/50' 
                         : 'bg-gray-50 border-gray-100 text-dark focus:ring-blue-500/20 focus:border-blue-500/50'
                 }`}
             >

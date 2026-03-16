@@ -39,7 +39,7 @@ export default function AIChatbot({ isFloating = false, onClose }) {
 
         // Simulate AI delay
         setTimeout(() => {
-            const aiResponse = getAIResponse(text);
+            const aiResponse = getAIResponse(text, userRole);
             const newAiMessage = {
                 id: Date.now() + 1,
                 text: aiResponse,

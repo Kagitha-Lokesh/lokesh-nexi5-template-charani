@@ -234,10 +234,13 @@ export default function LeaveManagement() {
 
                     {/* Year Dropdown */}
                     <div className="relative">
-                        <select className={`appearance-none border text-sm rounded-md pl-4 pr-10 py-2 focus:outline-none focus:ring-1 focus:ring-primary shadow-sm cursor-pointer transition-all hidden sm:block ${isDarkMode
-                            ? 'bg-[#0c162d] border-white/10 text-gray-300 focus:border-[#3ec3ff] focus:ring-[#3ec3ff] hover:bg-white/5'
+                        <select 
+                            className={`appearance-none border text-sm rounded-md pl-4 pr-10 py-2 focus:outline-none focus:ring-1 focus:ring-primary shadow-sm cursor-pointer transition-all hidden sm:block ${isDarkMode
+                            ? 'bg-slate-800 border-white/10 text-gray-300 focus:border-[#3ec3ff] focus:ring-[#3ec3ff] hover:bg-white/5'
                             : 'bg-white border-borderColor text-textSecondary focus:border-primary hover:bg-gray-50'
-                            }`}>
+                            }`}
+                            defaultValue={new Date().getFullYear()}
+                        >
                             {leaveYearOptions.map(year => (
                                 <option key={year} value={year}>{year}</option>
                             ))}
